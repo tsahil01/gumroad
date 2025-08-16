@@ -1,18 +1,12 @@
 # frozen_string_literal: true
 
-class QstValidationService
-  attr_reader :qst_id
-
+class QstValidationService < BaseValidationService
   def initialize(qst_id)
-    @qst_id = qst_id
-  end
-
-  def process
-    return false if qst_id.blank?
-
-    Rails.cache.fetch("revenu_quebec_validation_#{qst_id}", expires_in: 10.minutes) do
-      valid_qst?
-    end
+    super(qst_id, {
+      type: :custom_api,
+      cache_key: ->(identifier) { "revenu_quebec_validation_#{identifier}" },
+      method: :valid_qst
+    })
   end
 
   private
@@ -21,7 +15,7 @@ class QstValidationService
     )
 
     def valid_qst?
-      response = HTTParty.get(QST_VALIDATION_ENDPOINT_TEMPLATE.expand(qst_id:).to_s, timeout: 5)
+      response = HTTParty.get(QST_VALIDATION_ENDPOINT_TEMPLATE.expand(qst_id: identifier).to_s, timeout: 5)
       response.code == 200 && response.parsed_response.dig("Resultat", "StatutSousDossierUsager") == "R"
     end
 end

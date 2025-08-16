@@ -1,21 +1,14 @@
 # frozen_string_literal: true
 
 
-class TaxIdValidationService
-  attr_reader :tax_id, :country_code
-
+class TaxIdValidationService < BaseValidationService
   def initialize(tax_id, country_code)
-    @tax_id = tax_id
+    super(tax_id, {
+      type: :custom_api,
+      cache_key: ->(identifier) { "tax_id_validation_#{identifier}_#{country_code}" },
+      method: :valid_tax_id
+    })
     @country_code = country_code
-  end
-
-  def process
-    return false if tax_id.blank?
-    return false if country_code.blank?
-
-    Rails.cache.fetch("tax_id_validation_#{tax_id}_#{country_code}", expires_in: 10.minutes) do
-      valid_tax_id?
-    end
   end
 
   private
@@ -27,7 +20,7 @@ class TaxIdValidationService
     }
 
     def valid_tax_id?
-      response = HTTParty.get(TAX_ID_PRO_ENDPOINT_TEMPLATE.expand(country_code:, tax_id:).to_s, headers: TAX_ID_PRO_HEADERS, timeout: 5)
+      response = HTTParty.get(TAX_ID_PRO_ENDPOINT_TEMPLATE.expand(country_code: @country_code, tax_id: identifier).to_s, headers: TAX_ID_PRO_HEADERS, timeout: 5)
       response.code == 200 && response.parsed_response["is_valid"]
     end
 end

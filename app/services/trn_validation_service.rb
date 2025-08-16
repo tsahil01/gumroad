@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
-class TrnValidationService
-  attr_reader :trn
-
+class TrnValidationService < BaseValidationService
   def initialize(trn)
-    @trn = trn
-  end
-
-  def process
-    return false if trn.blank?
-    trn.length == 15
+    super(trn, {
+      type: :length,
+      length: 15
+    })
   end
 end
