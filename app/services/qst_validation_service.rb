@@ -5,7 +5,7 @@ class QstValidationService < BaseValidationService
     super(qst_id, {
       type: :custom_api,
       cache_key: ->(identifier) { "revenu_quebec_validation_#{identifier}" },
-      method: :valid_qst
+      method: :valid_qst?
     })
   end
 

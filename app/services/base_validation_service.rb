@@ -38,7 +38,7 @@ class BaseValidationService
   end
 
   def vatstack_api_validation
-    response = Rails.cache.fetch("vatstack_validation_#{identifier}", expires_in: 10.minutes) do
+    response = Rails.cache.fetch("vatstack_validation_#{validation_config[:vatstack_type]}_#{identifier}", expires_in: 10.minutes) do
       url = "https://api.vatstack.com/v1/validations"
       headers = {
         "X-API-KEY" => VATSTACK_API_KEY

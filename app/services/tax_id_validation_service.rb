@@ -6,7 +6,7 @@ class TaxIdValidationService < BaseValidationService
     super(tax_id, {
       type: :custom_api,
       cache_key: ->(identifier) { "tax_id_validation_#{identifier}_#{country_code}" },
-      method: :valid_tax_id
+      method: :valid_tax_id?
     })
     @country_code = country_code
   end
