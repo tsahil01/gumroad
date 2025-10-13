@@ -355,13 +355,13 @@ const CommentTextarea = ({
       {loggedInUser || purchase_id ? (
         <textarea ref={ref} rows={1} placeholder="Write a comment" {...props} />
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div>
           <a href={Routes.login_url({ host: appDomain })}>Log in</a> or{" "}
           <a href={Routes.signup_url({ host: appDomain })}>Register</a> to join the conversation
         </div>
       )}
       {loggedInUser != null || purchase_id != null ? (
-        <div className="override flex justify-end gap-3 grid-auto-flow-column">
+        <div className="flex justify-end gap-3 grid-auto-flow-column">
           {children}
         </div>
       ) : null}
