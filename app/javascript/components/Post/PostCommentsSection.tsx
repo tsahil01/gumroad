@@ -243,7 +243,7 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       <img className="h-12 w-12 col-start-1 row-span-2 row-start-1 rounded-full" alt="Comment author avatar" src={comment.author_avatar_url} />
       <div className={"grid gap-3 relative whitespace-pre-wrap col-start-2"}>
         {comment.replies.length > 0 || replyDraft != null ? (
-          <div className="content-[''] absolute -left-9 h-[calc(100%-3rem)] top-12 border-l border-[rgb(var(--parent-color)/var(--border-alpha))]" />
+           <div className="content-[''] absolute -left-9 h-[calc(100%-3rem)] top-12 border-l border-border" />
         ) : null}
         <header className="flex gap-3 items-center flex-wrap">
           <span className="font-bold text-decoration-none">{comment.author_name}</span>
@@ -297,9 +297,9 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       <div className="col-start-2">
         {replyDraft != null ? (
           <div className={"mt-5 -ml-6 max-w-none relative"}>
-          <div className="content-[''] absolute -top-12 -left-3 right-full w-[calc(0.75rem-1px)] border-b border-l border-[rgb(var(--parent-color)/var(--border-alpha))] h-18 rounded-bl-lg" />
+          <div className="content-[''] absolute -top-12 -left-3 right-full w-[calc(0.75rem-1px)] border-b border-l border-border h-18 rounded-bl-lg" />
           {comment.replies.length > 0 ? (
-            <div className="content-[''] absolute h-full -left-3 border-l border-[rgb(var(--parent-color)/var(--border-alpha))] top-0" />
+            <div className="content-[''] absolute h-full -left-3 border-l border-border top-0" />
           ) : null}
             <CommentTextarea
               value={replyDraft}
@@ -325,9 +325,9 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
         {comment.replies.map((reply, index) => (
           <div key={reply.id} className={"mt-5 -ml-6 max-w-none relative"}
           >
-          <div className="content-[''] absolute -top-12 -left-3 right-full w-[calc(0.75rem-1px)] border-b border-l border-[rgb(var(--parent-color)/var(--border-alpha))] h-18 rounded-bl-lg" />
+          <div className="content-[''] absolute -top-12 -left-3 right-full w-[calc(0.75rem-1px)] border-b border-l border-border h-18 rounded-bl-lg" />
           {index < comment.replies.length - 1 ? (
-            <div className="content-[''] absolute h-full -left-3 border-l border-[rgb(var(--parent-color)/var(--border-alpha))] top-0" />
+            <div className="content-[''] absolute h-full -left-3 border-l border-border top-0" />
           ) : null}
             <CommentContainer
               comment={reply}
