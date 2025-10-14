@@ -312,7 +312,7 @@ const AffiliatedPage = ({
         />
       ) : (
         <section className="p-4 md:p-8">
-          {initialAffiliatedProducts.length !== 0 ? (
+          {initialAffiliatedProducts.length === 0 ? (
             <div className="placeholder">
               <figure>
                 <img src={placeholder} />
