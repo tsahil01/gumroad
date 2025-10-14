@@ -372,7 +372,7 @@ const CommentTextarea = ({
         </div>
       )}
       {loggedInUser != null || purchase_id != null ? (
-        <div className="flex justify-end gap-3 grid-auto-flow-column">
+         <div className="flex justify-end gap-3">
           {children}
         </div>
       ) : null}
