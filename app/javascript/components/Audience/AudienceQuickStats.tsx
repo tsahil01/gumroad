@@ -14,7 +14,7 @@ export const AudienceQuickStats = ({
   const userAgentInfo = useUserAgentInfo();
 
   return (
-    <div className="stats-grid">
+    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
       <Stats
         className="total-followers"
         title={

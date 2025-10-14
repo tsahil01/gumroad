@@ -1,4 +1,4 @@
-import cx from "classnames";
+import { classNames } from "$app/utils/classNames";
 import * as React from "react";
 
 import { assertDefined } from "$app/utils/assert";
@@ -42,8 +42,17 @@ export const Stats = ({
   }, [value]);
 
   return (
-    <section className={cx("stats", className)}>
-      <h2>
+    <section className={classNames(
+      "text-4xl leading-tight p-8 border border-border rounded inline-grid content-between gap-2 bg-background text-foreground",
+      {
+        "text-green": className?.includes("success"),
+        "text-red": className?.includes("danger"),
+        "text-orange": className?.includes("warning"),
+        "text-purple": className?.includes("info"),
+      },
+      className
+    )}>
+      <h2 className="flex gap-2 text-base leading-normal">
         {title}
         {description ? (
           <WithTooltip tip={description} position="top">
@@ -51,8 +60,8 @@ export const Stats = ({
           </WithTooltip>
         ) : null}
       </h2>
-      <div ref={containerRef} className="overflow-hidden" style={{ overflowWrap: "initial" }}>
-        <span style={adjustedFontSize ? { fontSize: adjustedFontSize } : undefined}>{value ?? "-"}</span>
+      <div ref={containerRef} className="overflow-hidden break-words">
+        <span className={adjustedFontSize ? `text-[${adjustedFontSize}px]` : ""}>{value ?? "-"}</span>
       </div>
     </section>
   );
