@@ -241,7 +241,10 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
   return (
     <article className="grid grid-cols-[max-content_1fr] gap-3 override">
       <img className="h-12 w-12 col-start-1 row-span-2 row-start-1 rounded-full" alt="Comment author avatar" src={comment.author_avatar_url} />
-      <div className={classNames("grid gap-3 relative whitespace-pre-wrap col-start-2", (comment.replies.length > 0 || replyDraft != null) && "before:content-[''] before:absolute before:-left-9 before:h-[calc(100%-3rem)] before:top-12 before:border-l before:border-[rgb(var(--parent-color)/var(--border-alpha))]")}>
+      <div className={"grid gap-3 relative whitespace-pre-wrap col-start-2"}>
+        {comment.replies.length > 0 || replyDraft != null ? (
+          <div className="content-[''] absolute -left-9 h-[calc(100%-3rem)] top-12 border-l border-[rgb(var(--parent-color)/var(--border-alpha))]" />
+        ) : null}
         <header className="flex gap-3 items-center flex-wrap">
           <span className="font-bold text-decoration-none">{comment.author_name}</span>
           <time title={formatDate(parseISO(comment.created_at))}>{comment.created_at_humanized}</time>
@@ -293,7 +296,11 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       </div>
       <div className="col-start-2">
         {replyDraft != null ? (
-          <div className={classNames("mt-5 -ml-6 max-w-none relative", "before:content-[''] before:absolute before:-top-12 before:right-full before:w-[calc(0.75rem-1px)] before:border-b before:border-l before:border-[rgb(var(--parent-color)/var(--border-alpha))] before:h-18 before:rounded-bl-lg", comment.replies.length > 0 && "after:content-[''] after:absolute after:h-full after:-left-3 after:border-l after:border-[rgb(var(--parent-color)/var(--border-alpha))] after:top-0")}>
+          <div className={"mt-5 -ml-6 max-w-none relative"}>
+          <div className="content-[''] absolute -top-12 -left-3 right-full w-[calc(0.75rem-1px)] border-b border-l border-[rgb(var(--parent-color)/var(--border-alpha))] h-18 rounded-bl-lg" />
+          {comment.replies.length > 0 ? (
+            <div className="content-[''] absolute h-full -left-3 border-l border-[rgb(var(--parent-color)/var(--border-alpha))] top-0" />
+          ) : null}
             <CommentTextarea
               value={replyDraft}
               onChange={(event) => setReplyDraft(event.target.value)}
@@ -316,8 +323,12 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       </div>
       <div className="col-start-2">
         {comment.replies.map((reply, index) => (
-          <div key={reply.id} className={classNames("mt-5 -ml-6 max-w-none relative", "before:content-[''] before:absolute before:-top-12 before:right-full before:w-[calc(0.75rem-1px)] before:border-b before:border-l before:border-[rgb(var(--parent-color)/var(--border-alpha))] before:h-18 before:rounded-bl-lg", index < comment.replies.length - 1 && "after:content-[''] after:absolute after:h-full after:-left-3 after:border-l after:border-[rgb(var(--parent-color)/var(--border-alpha))] after:top-0")}
+          <div key={reply.id} className={"mt-5 -ml-6 max-w-none relative"}
           >
+          <div className="content-[''] absolute -top-12 -left-3 right-full w-[calc(0.75rem-1px)] border-b border-l border-[rgb(var(--parent-color)/var(--border-alpha))] h-18 rounded-bl-lg" />
+          {index < comment.replies.length - 1 ? (
+            <div className="content-[''] absolute h-full -left-3 border-l border-[rgb(var(--parent-color)/var(--border-alpha))] top-0" />
+          ) : null}
             <CommentContainer
               comment={reply}
               key={reply.id}
