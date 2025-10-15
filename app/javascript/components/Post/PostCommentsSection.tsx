@@ -323,8 +323,7 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       </div>
       <div className="col-start-2">
         {comment.replies.map((reply, index) => (
-          <div key={reply.id} className={"mt-5 -ml-6 max-w-none relative"}
-          >
+          <div key={reply.id} className={"mt-5 -ml-6 max-w-none relative"}>
           <div className="content-[''] absolute -top-12 -left-3 right-full w-2.5 border-b border-l border-border h-18 rounded-bl-lg" />
           {index < comment.replies.length - 1 ? (
             <div className="content-[''] absolute h-full -left-3 border-l border-border top-0" />
