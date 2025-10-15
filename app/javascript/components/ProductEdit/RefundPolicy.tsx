@@ -141,13 +141,19 @@ export const RefundPolicyModalPreview = ({ refundPolicy, open }: { refundPolicy:
   const userAgentInfo = useUserAgentInfo();
   const uid = React.useId();
   return (
-    <dialog open={!!refundPolicy.fine_print && open} aria-labelledby={uid}>
+    <dialog
+      className="fixed top-1/2 left-1/2 z-20 flex w-fit max-w-[43.75rem] min-w-[20rem] -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded border border-border bg-background p-8 text-foreground shadow-[0.5rem_0.5rem_0_rgb(0_0_0)] backdrop:bg-black/80 dark:shadow-none [&:not([open])]:hidden"
+      open={!!refundPolicy.fine_print && open}
+      aria-labelledby={uid}
+    >
       <header>
         <h2 id={uid}>{refundPolicy.title}</h2>
         <button className="close" aria-label="Close" />
       </header>
       <div style={{ whiteSpace: "pre-wrap" }}>{refundPolicy.fine_print}</div>
-      <footer>Last updated {new Date().toLocaleString(userAgentInfo.locale, { dateStyle: "medium" })}</footer>
+      <footer className="grid gap-4 sm:flex sm:justify-end">
+        Last updated {new Date().toLocaleString(userAgentInfo.locale, { dateStyle: "medium" })}
+      </footer>
     </dialog>
   );
 };

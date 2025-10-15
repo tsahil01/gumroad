@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Icon } from "$app/components/Icons";
 
 export const Modal = ({
   open,
@@ -38,6 +39,7 @@ export const Modal = ({
 
   return (
     <dialog
+      className="fixed top-1/2 left-1/2 z-20 flex w-fit max-w-[43.75rem] min-w-[20rem] -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded border border-border bg-background p-8 text-foreground shadow-[0.5rem_0.5rem_0_rgb(0_0_0)] backdrop:bg-black/80 dark:shadow-none [&:not([open])]:hidden"
       open={supportsNative ? undefined : open}
       ref={ref}
       onClick={(e) => {
@@ -56,13 +58,17 @@ export const Modal = ({
       aria-labelledby={id}
     >
       {title ? (
-        <h2 id={id}>
+        <h2 className="flex items-start justify-between gap-4" id={id}>
           {title}
-          {allowClose ? <button type="button" className="close" aria-label="Close" onClick={dispatchClose} /> : null}
+          {allowClose ? (
+            <button type="button" className="close" aria-label="Close" onClick={dispatchClose}>
+              <Icon className="text-sm" name="x" />
+            </button>
+          ) : null}
         </h2>
       ) : null}
       {children}
-      {footer ? <footer>{footer}</footer> : null}
+      {footer ? <footer className="grid gap-4 sm:flex sm:justify-end">{footer}</footer> : null}
     </dialog>
   );
 };
