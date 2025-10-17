@@ -18,15 +18,6 @@ export const Modal = ({
 }) => {
   const dispatchClose = () => allowClose && onClose?.();
   const ref = React.useRef<HTMLDialogElement | null>(null);
-  const [supportsNative, setSupportsNative] = React.useState(false);
-  React.useEffect(() => {
-    if (!ref.current) return;
-    if (supportsNative) {
-      if (open) ref.current.showModal();
-      else ref.current.close();
-    }
-    if ("showModal" in ref.current) setSupportsNative(true);
-  }, [open, supportsNative]);
 
   const id = React.useId();
 
@@ -40,7 +31,7 @@ export const Modal = ({
   return (
     <dialog
       className="fixed top-1/2 left-1/2 z-20 flex w-fit max-w-[43.75rem] min-w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded border border-border bg-background p-8 text-foreground shadow-[0.5rem_0.5rem_0_rgb(0_0_0)] backdrop:bg-black/80 dark:shadow-none [&:not([open])]:hidden"
-      open={supportsNative ? undefined : open}
+      open={open}
       ref={ref}
       onClick={(e) => {
         if (!ref.current) return;
