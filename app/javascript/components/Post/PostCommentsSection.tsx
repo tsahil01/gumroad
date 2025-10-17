@@ -244,7 +244,7 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       <UserAvatar size="large" className="col-start-1 row-span-2 row-start-1" alt="" src={comment.author_avatar_url} />
       <div className="relative col-start-2 grid gap-3 whitespace-pre-wrap">
         {comment.replies.length > 0 || replyDraft != null ? (
-          <div className="absolute top-12 -left-9 h-[calc(100%-3rem)] border-l border-border content-['']" />
+          <div className="absolute top-12 -left-9 h-[calc(100%-3rem)] border-l border-border" />
         ) : null}
         <header className="flex flex-wrap items-center gap-3">
           <span className="text-decoration-none font-bold">{comment.author_name}</span>
@@ -298,9 +298,9 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       <div className="col-start-2">
         {replyDraft != null ? (
           <div className="relative mt-5 -ml-6 max-w-none">
-            <div className="absolute -top-12 right-full -left-3 h-18 w-3 rounded-bl-lg border-b border-l border-border content-['']" />
+            <div className="absolute -top-12 right-full -left-3 h-18 w-3 rounded-bl-lg border-b border-l border-border" />
             {comment.replies.length > 0 ? (
-              <div className="absolute top-0 -left-3 h-full border-l border-border content-['']" />
+              <div className="absolute top-0 -left-3 h-full border-l border-border" />
             ) : null}
             <CommentTextarea
               value={replyDraft}
@@ -325,9 +325,9 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       <div className="col-start-2">
         {comment.replies.map((reply, index) => (
           <div key={reply.id} className="relative mt-5 -ml-6 max-w-none">
-            <div className="absolute -top-12 right-full -left-3 h-18 w-3 rounded-bl-lg border-b border-l border-border content-['']" />
+            <div className="absolute -top-12 right-full -left-3 h-18 w-3 rounded-bl-lg border-b border-l border-border" />
             {index < comment.replies.length - 1 ? (
-              <div className="absolute top-0 -left-3 h-full border-l border-border content-['']" />
+              <div className="absolute top-0 -left-3 h-full border-l border-border" />
             ) : null}
             <CommentContainer
               comment={reply}
