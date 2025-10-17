@@ -40,6 +40,7 @@ import { useDebouncedCallback } from "$app/components/useDebouncedCallback";
 import { Sort, useSortingTableDriver } from "$app/components/useSortingTableDriver";
 
 import placeholder from "$assets/images/placeholders/upsells.png";
+import { Modal } from "$app/components/Modal";
 
 type Variant = {
   id: string;
@@ -929,16 +930,8 @@ const Form = ({
           </section>
         </form>
         <CheckoutPreview cartItem={previewCartItem}>
-          <dialog
-            className="fixed top-1/2 left-1/2 z-20 flex w-fit max-w-[43.75rem] min-w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded border border-border bg-background p-8 text-foreground shadow-[0.5rem_0.5rem_0_rgb(0_0_0)] backdrop:bg-black/80 dark:shadow-none [&:not([open])]:hidden"
-            open
-            aria-labelledby={`${uid}preview`}
-          >
-            <header>
-              <h2 id={`${uid}preview`}>{offerText.value}</h2>
-              <button className="close" />
-            </header>
-            {isCrossSell ? (
+          <Modal open={true} title={offerText.value} aria-labelledby={`${uid}preview`}>
+             {isCrossSell ? (
               <CrossSellModal
                 crossSell={{
                   id: "",
@@ -1010,7 +1003,7 @@ const Form = ({
                 decline={() => {}}
               />
             )}
-          </dialog>
+          </Modal>
         </CheckoutPreview>
       </div>
     </>
