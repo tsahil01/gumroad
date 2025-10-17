@@ -20,6 +20,7 @@ import { useLoggedInUser } from "$app/components/LoggedInUser";
 import { Modal } from "$app/components/Modal";
 import { Popover } from "$app/components/Popover";
 import { showAlert } from "$app/components/server-components/Alert";
+import { UserAvatar } from "$app/components/server-components/CommunitiesPage/UserAvatar";
 
 import defaultUserAvatar from "$assets/images/user-avatar.png";
 
@@ -240,11 +241,7 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
 
   return (
     <article className="override grid grid-cols-[max-content_1fr] gap-3">
-      <img
-        className="col-start-1 row-span-2 row-start-1 h-12 w-12 rounded-full"
-        alt="Comment author avatar"
-        src={comment.author_avatar_url}
-      />
+      <UserAvatar size="large" className="col-start-1 row-span-2 row-start-1" alt="" src={comment.author_avatar_url} />
       <div className="relative col-start-2 grid gap-3 whitespace-pre-wrap">
         {comment.replies.length > 0 || replyDraft != null ? (
           <div className="absolute top-12 -left-9 h-[calc(100%-3rem)] border-l border-border content-['']" />
@@ -364,9 +361,10 @@ const CommentTextarea = ({
   return (
     <div className={classNames("override grid gap-3", showAvatar && "relative grid-cols-[max-content_1fr]")}>
       {showAvatar ? (
-        <img
-          className="col-start-1 row-span-2 row-start-1 h-12 w-12 rounded-full"
-          alt="Current user avatar"
+        <UserAvatar
+          size="large"
+          className="col-start-1 row-span-2 row-start-1"
+          alt=""
           src={loggedInUser?.avatarUrl ?? defaultUserAvatar}
         />
       ) : null}
