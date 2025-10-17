@@ -1,4 +1,3 @@
-import { classNames } from "$app/utils/classNames";
 import { parseISO } from "date-fns";
 import * as React from "react";
 
@@ -10,6 +9,7 @@ import {
   Comment,
   PaginatedComments,
 } from "$app/data/comments";
+import { classNames } from "$app/utils/classNames";
 import { formatDate } from "$app/utils/date";
 import { assertResponseError } from "$app/utils/request";
 
@@ -152,7 +152,7 @@ export const PostCommentsSection = ({ paginated_comments }: Props) => {
         ))}
       </div>
       {data.pagination.next !== null ? (
-        <div className="flex justify-center mt-6">
+        <div className="mt-6 flex justify-center">
           <Button disabled={loadingMore} onClick={() => void loadMoreComments()}>
             {loadingMore ? "Loading more comments..." : "Load more comments"}
           </Button>
@@ -239,14 +239,18 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
   };
 
   return (
-    <article className="grid grid-cols-[max-content_1fr] gap-3 override">
-      <img className="h-12 w-12 col-start-1 row-span-2 row-start-1 rounded-full" alt="Comment author avatar" src={comment.author_avatar_url} />
-      <div className={"grid gap-3 relative whitespace-pre-wrap col-start-2"}>
+    <article className="override grid grid-cols-[max-content_1fr] gap-3">
+      <img
+        className="col-start-1 row-span-2 row-start-1 h-12 w-12 rounded-full"
+        alt="Comment author avatar"
+        src={comment.author_avatar_url}
+      />
+      <div className="relative col-start-2 grid gap-3 whitespace-pre-wrap">
         {comment.replies.length > 0 || replyDraft != null ? (
-           <div className="content-[''] absolute -left-9 h-[calc(100%-3rem)] top-12 border-l border-border" />
+          <div className="absolute top-12 -left-9 h-[calc(100%-3rem)] border-l border-border content-['']" />
         ) : null}
-        <header className="flex gap-3 items-center flex-wrap">
-          <span className="font-bold text-decoration-none">{comment.author_name}</span>
+        <header className="flex flex-wrap items-center gap-3">
+          <span className="text-decoration-none font-bold">{comment.author_name}</span>
           <time title={formatDate(parseISO(comment.created_at))}>{comment.created_at_humanized}</time>
           {comment.author_id === seller_id ? <span className="pill small">Creator</span> : null}
           <div className="ml-auto">
@@ -296,11 +300,11 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       </div>
       <div className="col-start-2">
         {replyDraft != null ? (
-          <div className={"mt-5 -ml-6 max-w-none relative"}>
-          <div className="content-[''] absolute -top-12 -left-3 right-full w-3 border-b border-l border-border h-18 rounded-bl-lg" />
-          {comment.replies.length > 0 ? (
-            <div className="content-[''] absolute h-full -left-3 border-l border-border top-0" />
-          ) : null}
+          <div className="relative mt-5 -ml-6 max-w-none">
+            <div className="absolute -top-12 right-full -left-3 h-18 w-3 rounded-bl-lg border-b border-l border-border content-['']" />
+            {comment.replies.length > 0 ? (
+              <div className="absolute top-0 -left-3 h-full border-l border-border content-['']" />
+            ) : null}
             <CommentTextarea
               value={replyDraft}
               onChange={(event) => setReplyDraft(event.target.value)}
@@ -323,11 +327,11 @@ const CommentContainer = ({ comment, upsertComment, confirmCommentDeletion }: Co
       </div>
       <div className="col-start-2">
         {comment.replies.map((reply, index) => (
-          <div key={reply.id} className={"mt-5 -ml-6 max-w-none relative"}>
-          <div className="content-[''] absolute -top-12 -left-3 right-full w-3 border-b border-l border-border h-18 rounded-bl-lg" />
-          {index < comment.replies.length - 1 ? (
-            <div className="content-[''] absolute h-full -left-3 border-l border-border top-0" />
-          ) : null}
+          <div key={reply.id} className="relative mt-5 -ml-6 max-w-none">
+            <div className="absolute -top-12 right-full -left-3 h-18 w-3 rounded-bl-lg border-b border-l border-border content-['']" />
+            {index < comment.replies.length - 1 ? (
+              <div className="absolute top-0 -left-3 h-full border-l border-border content-['']" />
+            ) : null}
             <CommentContainer
               comment={reply}
               key={reply.id}
@@ -360,7 +364,11 @@ const CommentTextarea = ({
   return (
     <div className={classNames("override grid gap-3", showAvatar && "relative grid-cols-[max-content_1fr]")}>
       {showAvatar ? (
-        <img className="h-12 w-12 col-start-1 row-span-2 row-start-1 rounded-full" alt="Current user avatar" src={loggedInUser?.avatarUrl ?? defaultUserAvatar} />
+        <img
+          className="col-start-1 row-span-2 row-start-1 h-12 w-12 rounded-full"
+          alt="Current user avatar"
+          src={loggedInUser?.avatarUrl ?? defaultUserAvatar}
+        />
       ) : null}
       {loggedInUser || purchase_id ? (
         <textarea ref={ref} rows={1} placeholder="Write a comment" {...props} />
@@ -370,11 +378,7 @@ const CommentTextarea = ({
           <a href={Routes.signup_url({ host: appDomain })}>Register</a> to join the conversation
         </div>
       )}
-      {loggedInUser != null || purchase_id != null ? (
-         <div className="flex justify-end gap-3">
-          {children}
-        </div>
-      ) : null}
+      {loggedInUser != null || purchase_id != null ? <div className="flex justify-end gap-3">{children}</div> : null}
     </div>
   );
 };
@@ -383,4 +387,3 @@ const nestComments = (comments: readonly Comment[], id: string | null = null): C
   comments
     .filter((comment) => comment.parent_id === id)
     .map((comment) => ({ ...comment, replies: nestComments(comments, comment.id) }));
-
