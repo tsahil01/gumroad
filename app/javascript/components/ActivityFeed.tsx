@@ -6,6 +6,7 @@ import { Icon } from "$app/components/Icons";
 import { useLoggedInUser } from "$app/components/LoggedInUser";
 import Placeholder from "$app/components/ui/Placeholder";
 import { useUserAgentInfo } from "$app/components/UserAgent";
+import { classNames } from "$app/utils/classNames";
 type SaleItemDetails = {
   price_cents: number;
   email: string;
@@ -66,10 +67,10 @@ export const ActivityFeed = ({ items }: { items: ActivityItem[] }) => {
   }
 
   return (
-    <div className="stack">
+    <div className="grid bg-background border border-border rounded-sm">
       {items.map(({ type, timestamp, details }, i) => (
-        <div key={i}>
-          <span className="flex gap-3">
+        <div key={i} className={classNames("flex flex-wrap items-center justify-between p-4 gap-4", i > 0 && "border-t border-border")}>
+          <span className="flex gap-3 flex-grow">
             {type === "new_sale" && <Sale details={details} />}
             {type === "follower_added" && <Follow details={details} />}
             {type === "follower_removed" && <FollowRemoved details={details} />}

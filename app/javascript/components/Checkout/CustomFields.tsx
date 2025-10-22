@@ -149,9 +149,9 @@ const SellerCustomFields = ({ seller }: { seller: Creator }) => {
             <legend>
               <label>{product.name}</label>
             </legend>
-            <div className="stack">
-              <div>
-                <section className="paragraphs">
+            <div className="grid bg-background border border-border rounded-sm">
+              <div className="flex flex-wrap items-center justify-between p-4 gap-4">
+                <section className="paragraphs flex-grow">
                   {customFields.map((field) => (
                     <CustomField key={field.id} field={field} fieldKey={getCustomFieldKey(field, product)} />
                   ))}

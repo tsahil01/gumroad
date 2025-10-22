@@ -12,18 +12,21 @@ import { DiscordButton } from "$app/components/DiscordButton";
 import { Icon } from "$app/components/Icons";
 import { useLoggedInUser } from "$app/components/LoggedInUser";
 import { showAlert } from "$app/components/server-components/Alert";
+import { classNames } from "$app/utils/classNames";
 
 export const LineItem = ({
   name,
   price,
   quantity,
+  className,
 }: {
   name: string;
   price?: string | undefined;
   quantity?: number | undefined;
+  className?: string;
 }) => (
   <>
-    <h4 className="product-details">
+    <h4 className={classNames("product-details", className)}>
       <div className="product-name">
         {name}
         {quantity ? <span className="quantity">× {quantity}</span> : null}
@@ -33,21 +36,22 @@ export const LineItem = ({
   </>
 );
 
-export const LineItemResultEntry = ({ name, result }: { name: string; result: LineItemResult }) =>
+export const LineItemResultEntry = ({ name, result, className }: { name: string; result: LineItemResult; className?: string }) =>
   result.success ? (
-    <SuccessfulLineItemResultEntry name={name} result={result} />
+    <SuccessfulLineItemResultEntry name={name} result={result} className={className ?? ""} />
   ) : (
-    <FailedLineItemResultEntry name={name} result={result} />
+    <FailedLineItemResultEntry name={name} result={result} className={className ?? ""} />
   );
 
-const FailedLineItemResultEntry = ({ name, result }: { name: string; result: ErrorLineItemResult }) => {
+const FailedLineItemResultEntry = ({ name, result, className }: { name: string; result: ErrorLineItemResult; className?: string }) => {
   const message = result.error_message ?? "Sorry, something went wrong.";
   return (
     <>
-      <div>
-        <section className="stack borderless">
-          <div>
+      <div className={className}>
+        <section className="grid bg-background border-none rounded-sm gap-4">
+          <div className="flex flex-wrap items-center justify-between border-none gap-4">
             <LineItem
+              className="flex-grow font-bold"
               name={name}
               price={"formatted_price" in result ? (result.formatted_price ?? undefined) : undefined}
             />
@@ -65,7 +69,7 @@ const FailedLineItemResultEntry = ({ name, result }: { name: string; result: Err
   );
 };
 
-const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result: SuccessfulLineItemResult }) => {
+const SuccessfulLineItemResultEntry = ({ name, result, className }: { name: string; result: SuccessfulLineItemResult; className?: string }) => {
   // TODO only do this for a logged-in user
   const trackViewContentClick = () => {
     void trackUserProductAction({
@@ -76,18 +80,20 @@ const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result:
 
   return (
     <>
-      <div>
-        <section className="stack borderless">
-          <div>
+      <div className={className}>
+      <section className="grid bg-background border-none rounded-sm gap-4">
+          <div className="flex flex-wrap items-center justify-between border-none gap-4">
             <LineItem
+              className="flex-grow font-bold"
               name={`${name} ${result.variants_displayable}`}
               quantity={result.show_quantity ? result.quantity : undefined}
               price={result.price}
             />
           </div>
           {result.enabled_integrations.discord ? (
-            <div>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
               <DiscordButton
+                className="flex-grow basis-0"
                 purchaseId={result.id}
                 connected={false}
                 redirectSettings={{ host: result.domain, protocol: result.protocol }}
@@ -99,8 +105,9 @@ const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result:
             </div>
           ) : null}
           {result.content_url ? (
-            <div>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
               <NavigationButton
+                className="flex-grow basis-0"
                 href={result.content_url}
                 color="accent"
                 target="_blank"
@@ -111,8 +118,8 @@ const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result:
             </div>
           ) : null}
           {result.is_gift_sender_purchase ? (
-            <div>
-              <div className="text-muted">
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <div className="text-muted flex-grow">
                 {result.gift_sender_text}
                 {result.has_files
                   ? "They'll get an email with your note and a download link."
@@ -120,22 +127,22 @@ const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result:
               </div>
             </div>
           ) : result.extra_purchase_notice ? (
-            <div>
-              <div className="text-muted">{result.extra_purchase_notice}</div>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <div className="text-muted flex-grow">{result.extra_purchase_notice}</div>
             </div>
           ) : null}
           {result.is_gift_receiver_purchase ? (
-            <div>
-              <div className="text-muted">{result.gift_receiver_text}</div>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <div className="text-muted flex-grow">{result.gift_receiver_text}</div>
             </div>
           ) : null}
           {result.test_purchase_notice ? (
-            <div>
-              <div className="text-muted">{result.test_purchase_notice}</div>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <div className="text-muted flex-grow">{result.test_purchase_notice}</div>
             </div>
           ) : null}
-          <div>
-            <div className="generate-invoice text-muted">
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <div className="generate-invoice text-muted flex-grow">
               Need an invoice for this?{" "}
               <a
                 target="_blank"
@@ -151,9 +158,9 @@ const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result:
 
       {result.has_shipping_to_show ? (
         <div>
-          <section className="stack borderless">
-            <div>
-              <LineItem name="Shipping" price={result.shipping_amount} />
+          <section className="grid bg-background border-none rounded-sm gap-4">
+            <div className="flex flex-wrap items-center justify-between border-none gap-4">
+              <LineItem className="flex-grow font-bold" name="Shipping" price={result.shipping_amount} />
             </div>
           </section>
         </div>
@@ -161,9 +168,9 @@ const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result:
 
       {result.has_sales_tax_to_show ? (
         <div>
-          <section className="stack borderless">
-            <div>
-              <LineItem name={result.sales_tax_label ?? ""} price={result.sales_tax_amount} />
+          <section className="grid bg-background border-none rounded-sm gap-4">
+            <div className="flex flex-wrap items-center justify-between border-none gap-4">
+              <LineItem className="flex-grow font-bold" name={result.sales_tax_label ?? ""} price={result.sales_tax_amount} />
             </div>
           </section>
         </div>
@@ -174,7 +181,9 @@ const SuccessfulLineItemResultEntry = ({ name, result }: { name: string; result:
 
 export const CreateAccountForm = ({
   createAccountData,
+  className,
 }: {
+  className?: string;
   createAccountData: Pick<CreateAccountPayload, "email" | "cardParams" | "purchaseId">;
 }) => {
   const [password, setPassword] = React.useState("");
@@ -206,7 +215,7 @@ export const CreateAccountForm = ({
         evt.preventDefault();
         void startAccountCreation();
       }}
-      className="paragraphs"
+      className={classNames("paragraphs", className)}
     >
       {status === "success" ? (
         <div className="success" role="alert">
@@ -263,17 +272,17 @@ export const Receipt = ({
   const [state] = useState();
   if (state.status.type !== "finished") return null;
   return (
-    <div className="stack mx-auto my-8 max-w-2xl">
-      <header>
-        <h4 className="relative">
+    <div className="grid bg-background border border-border rounded-sm mx-auto my-8 max-w-2xl">
+      <header className="flex flex-wrap items-center justify-between p-4 gap-4">
+        <h4 className="relative flex-grow font-bold">
           Checkout
           <a href={discoverUrl} style={{ position: "absolute", right: 0 }} aria-label="Close">
             <Icon name="x-circle" />
           </a>
         </h4>
       </header>
-      <header>
-        <h2>{results.some(({ result }) => !result.success) ? "Summary" : "Your purchase was successful!"}</h2>
+      <header className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+        <h2 className="flex-grow font-bold">{results.some(({ result }) => !result.success) ? "Summary" : "Your purchase was successful!"}</h2>
 
         {results.some(({ result }) => result.success) ? (
           <div>
@@ -290,10 +299,11 @@ export const Receipt = ({
         ) : null}
       </header>
       {results.map(({ result, item }, key) => (
-        <LineItemResultEntry key={key} result={result} name={item.product.name} />
+        <LineItemResultEntry className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border" key={key} result={result} name={item.product.name} />
       ))}
       {!user && canBuyerSignUp ? (
         <CreateAccountForm
+          className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border"
           createAccountData={{
             email: state.email,
             cardParams:

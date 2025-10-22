@@ -7,11 +7,11 @@ export const Layout = ({ heading, children }: { heading: string; children: React
 
   return (
     <>
-      <div className="stack">
-        <header>
-          <h2>{heading}</h2>
+      <div className="grid bg-background border border-border rounded-sm">
+        <header className="flex flex-wrap items-center justify-between p-4 gap-4">
+          <h2 className="flex-grow">{heading}</h2>
         </header>
-        <p>{children}</p>
+        <p className="flex flex-wrap items-center justify-between p-4 gap-4">{children}</p>
       </div>
       <footer
         style={{

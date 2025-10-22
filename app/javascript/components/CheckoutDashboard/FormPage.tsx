@@ -19,6 +19,7 @@ import { useLoggedInUser } from "$app/components/LoggedInUser";
 import { Select } from "$app/components/Select";
 import { Toggle } from "$app/components/Toggle";
 import { TypeSafeOptionSelect } from "$app/components/TypeSafeOptionSelect";
+import { classNames } from "$app/utils/classNames";
 
 export type SimpleProduct = { id: string; name: string; archived: boolean };
 
@@ -124,10 +125,10 @@ const FormPage = ({
               name or more specific instructions.
             </div>
             {customFields.length > 0 ? (
-              <div className="stack">
+              <div className="grid bg-background border border-border rounded-sm">
                 {customFields.map((field, i) => (
-                  <div key={field.key}>
-                    <div className="paragraphs">
+                  <div key={field.key} className={classNames("flex flex-wrap items-center justify-between p-4 gap-4", i > 0 && "border-t border-border")}>
+                    <div className="paragraphs flex-grow">
                       <fieldset>
                         <legend>
                           <label htmlFor={`${uid}-${field.key}-type`}>Type of field</label>

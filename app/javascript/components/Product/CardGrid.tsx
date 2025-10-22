@@ -232,8 +232,8 @@ export const CardGrid = ({
       )}
     >
       {hideFilters ? null : (
-        <div className="stack overflow-y-auto lg:sticky lg:inset-y-4 lg:max-h-[calc(100vh-2rem)]" aria-label="Filters">
-          <header>
+        <div className="grid bg-background border border-border rounded-sm overflow-y-auto lg:sticky lg:inset-y-4 lg:max-h-[calc(100vh-2rem)]" aria-label="Filters">
+          <header className="flex flex-wrap items-center justify-between p-4 gap-4">
             {title ?? "Filters"}
             {anyFilters ? (
               <div className="text-right">
@@ -245,9 +245,9 @@ export const CardGrid = ({
           </header>
           {prependFilters}
           {hideSort ? null : (
-            <details>
+            <details className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
               <summary>Sort by</summary>
-              <fieldset role="group">
+              <fieldset role="group" className="flex-1">
                 {(onProfile ? PROFILE_SORT_KEYS : SORT_KEYS).map((key) => (
                   <label key={key}>
                     {SORT_BY_LABELS[key]}
@@ -264,9 +264,9 @@ export const CardGrid = ({
             </details>
           )}
           {results?.tags_data.length || searchParams.tags?.length || tagsOpen ? (
-            <details onToggle={() => setTagsOpen(!tagsOpen)}>
-              <summary>Tags</summary>
-              <fieldset role="group">
+            <details onToggle={() => setTagsOpen(!tagsOpen)} className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <summary className="flex-grow">Tags</summary>
+              <fieldset role="group" className="flex-1">
                 <label>
                   All Products
                   <input
@@ -288,9 +288,9 @@ export const CardGrid = ({
             </details>
           ) : null}
           {results?.filetypes_data.length || searchParams.filetypes?.length || filetypesOpen ? (
-            <details onToggle={() => setFiletypesOpen(!filetypesOpen)}>
-              <summary>Contains</summary>
-              <fieldset role="group">
+            <details className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border" onToggle={() => setFiletypesOpen(!filetypesOpen)}>
+              <summary className="flex-grow">Contains</summary>
+              <fieldset role="group" className="flex-1">
                 {results ? (
                   <FilterCheckboxes
                     filters={concatFoundAndNotFound(results.filetypes_data, searchParams.filetypes)}
@@ -302,8 +302,8 @@ export const CardGrid = ({
               </fieldset>
             </details>
           ) : null}
-          <details>
-            <summary>Price</summary>
+          <details className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <summary className="flex-grow">Price</summary>
             <div
               style={{
                 display: "grid",

@@ -833,20 +833,20 @@ const ContentTabContent = ({ selectedVariantId }: { selectedVariantId: string | 
               ) : null}
               {isDesktop ? (
                 <>
-                  <div className="stack">
-                    <ReviewForm permalink="" purchaseId="" review={null} preview />
+                  <div className="grid bg-background border border-border rounded-sm">
+                    <ReviewForm className="flex flex-wrap items-center justify-between p-4 gap-4" permalink="" purchaseId="" review={null} preview />
                   </div>
-                  <div className="stack">
+                  <div className="grid bg-background border border-border rounded-sm">
                     {product.native_type === "membership" ? (
-                      <details>
+                      <details className="flex flex-wrap items-center justify-between p-4 gap-4">
                         <summary inert>Membership</summary>
                       </details>
                     ) : null}
-                    <details>
-                      <summary inert>Receipt</summary>
+                    <details className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                      <summary inert className="flex-grow">Receipt</summary>
                     </details>
-                    <details>
-                      <summary inert>Library</summary>
+                    <details className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                      <summary inert className="flex-grow">Library</summary>
                     </details>
                   </div>
                   <EntityInfo

@@ -7,17 +7,20 @@ import { startOauthRedirectChecker } from "$app/utils/oauth";
 import { Button } from "$app/components/Button";
 import { LoadingSpinner } from "$app/components/LoadingSpinner";
 import { showAlert } from "$app/components/server-components/Alert";
+import { classNames } from "$app/utils/classNames";
 
 export const DiscordButton = ({
   purchaseId,
   connected,
   redirectSettings,
   customState,
+  className,
 }: {
   purchaseId: string;
   connected: boolean;
   redirectSettings?: { host: string; protocol: string };
   customState?: string;
+  className?: string;
 }) => {
   const [discordConnected, setDiscordConnected] = React.useState(connected);
   const [loading, setLoading] = React.useState(false);
@@ -74,7 +77,7 @@ export const DiscordButton = ({
       <LoadingSpinner width="2em" />
     </div>
   ) : (
-    <Button className="button-discord" onClick={discordConnected ? leaveDiscord : openJoinDiscordPopup}>
+    <Button className={classNames("button-discord", className)} onClick={discordConnected ? leaveDiscord : openJoinDiscordPopup}>
       {discordConnected ? "Leave Discord" : "Join Discord"}
     </Button>
   );

@@ -11,7 +11,7 @@ import { DataCollector, PayPal } from "braintree-web";
 import * as BraintreeClient from "braintree-web/client";
 import * as BraintreeDataCollector from "braintree-web/data-collector";
 import * as BraintreePaypal from "braintree-web/paypal";
-import cx from "classnames";
+import { classNames } from "$app/utils/classNames";
 import * as React from "react";
 
 import { useBraintreeToken } from "$app/data/braintree_client_token_data";
@@ -136,7 +136,7 @@ const StateInput = () => {
   }
 
   return (
-    <fieldset className={cx({ danger: errors.has("state") })}>
+    <fieldset className={classNames({ danger: errors.has("state") })}>
       <legend>
         <label htmlFor={`${uid}state`}>{stateLabel}</label>
       </legend>
@@ -175,7 +175,7 @@ const ZipCodeInput = () => {
   const label = state.country === "US" || state.country === "PH" ? "ZIP code" : "Postal";
 
   return (
-    <fieldset className={cx({ danger: errors.has("zipCode") })}>
+    <fieldset className={classNames({ danger: errors.has("zipCode") })}>
       <legend>
         <label htmlFor={`${uid}zipCode`}>{label}</label>
       </legend>
@@ -218,13 +218,13 @@ const EmailAddress = () => {
   return (
     <div>
       <div className="paragraphs">
-        <fieldset className={cx({ danger: errors.has("email") })}>
+        <fieldset className={classNames({ danger: errors.has("email") })}>
           <legend>
             <label htmlFor={`${uid}email`}>
               <h4>Email address</h4>
             </label>
           </legend>
-          <div className={cx("popover", { expanded: !!state.emailTypoSuggestion })} style={{ width: "100%" }}>
+          <div className={classNames("popover", { expanded: !!state.emailTypoSuggestion })} style={{ width: "100%" }}>
             <input
               id={`${uid}email`}
               type="email"
@@ -384,7 +384,7 @@ const SharedInputs = () => {
               </div>
             ) : null}
             {showVatIdInput ? (
-              <fieldset className={cx({ danger: errors.has("vatId") })}>
+                <fieldset className={classNames({ danger: errors.has("vatId") })}>
                 <legend>
                   <label htmlFor={`${uid}vatId`}>{vatLabel}</label>
                 </legend>
@@ -503,7 +503,7 @@ const CustomerDetails = () => {
                 </label>
               ) : null}
             </h4>
-            <fieldset className={cx({ danger: errors.has("fullName") })}>
+            <fieldset className={classNames({ danger: errors.has("fullName") })}>
               <legend>
                 <label htmlFor={`${uid}fullName`}>Full name</label>
               </legend>
@@ -517,7 +517,7 @@ const CustomerDetails = () => {
                 onChange={(e) => dispatch({ type: "set-value", fullName: e.target.value })}
               />
             </fieldset>
-            <fieldset className={cx({ danger: errors.has("address") })}>
+            <fieldset className={classNames({ danger: errors.has("address") })}>
               <legend>
                 <label htmlFor={`${uid}address`}>Street address</label>
               </legend>
@@ -532,7 +532,7 @@ const CustomerDetails = () => {
               />
             </fieldset>
             <div style={{ display: "grid", gridAutoFlow: "column", gridAutoColumns: "1fr", gap: "var(--spacer-2)" }}>
-              <fieldset className={cx({ danger: errors.has("city") })}>
+              <fieldset className={classNames({ danger: errors.has("city") })}>
                 <legend>
                   <label htmlFor={`${uid}city`}>City</label>
                 </legend>
@@ -786,7 +786,7 @@ const TipSelector = () => {
           </div>
         ) : null}
         {state.tip.type === "fixed" ? (
-          <fieldset className={cx({ danger: errors.has("tip") })}>
+          <fieldset className={classNames({ danger: errors.has("tip") })}>
             <PriceInput
               hasError={errors.has("tip")}
               ariaLabel="Tip"
@@ -1141,7 +1141,7 @@ const StripePaymentRequest = () => {
         button: (
           <PaymentMethodRadio paymentMethod="stripePaymentRequest">
             <span
-              className={cx("brand-icon", {
+              className={classNames("brand-icon", {
                 "brand-icon-google": paymentMethods.googlePay,
                 "brand-icon-apple": paymentMethods.applePay,
               })}
@@ -1203,10 +1203,10 @@ export const PaymentForm = ({
   }, [state.status.type]);
 
   return (
-    <div ref={paymentFormRef} className={cx("stack", className)} aria-label="Payment form">
+    <div ref={paymentFormRef} className={classNames("grid bg-background border border-border rounded-sm", className)} aria-label="Payment form">
       {isTestPurchase ? (
-        <div>
-          <div role="alert" className="info">
+        <div className="flex flex-wrap items-center justify-between p-4 gap-4">
+          <div role="alert" className="info flex-grow">
             This will be a test purchase as you are the creator of at least one of the products. Your payment method
             will not be charged.
           </div>
@@ -1215,8 +1215,8 @@ export const PaymentForm = ({
       <EmailAddress />
       {!isFreePurchase ? (
         <>
-          <div>
-            <div className="paragraphs">
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <div className="paragraphs flex-grow">
               <h4>Pay with</h4>
               {state.availablePaymentMethods.length > 1 ? (
                 <Tabs>
@@ -1228,8 +1228,8 @@ export const PaymentForm = ({
             </div>
           </div>
           {notice ? (
-            <div>
-              <div role="alert" className="info">
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <div role="alert" className="info flex-grow">
                 {notice}
               </div>
             </div>

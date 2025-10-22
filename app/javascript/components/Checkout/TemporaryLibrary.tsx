@@ -33,9 +33,10 @@ export const TemporaryLibrary = ({ results, canBuyerSignUp }: { results: Result[
       <section className="p-4 md:p-8">
         <div className="grid grid-cols-1 items-start gap-x-16 gap-y-8 lg:grid-cols-[var(--grid-cols-sidebar)]">
           {!user && canBuyerSignUp ? (
-            <div className="stack">
-              <div>
+            <div className="grid bg-background border border-border rounded-sm">
+              <div className="flex flex-wrap items-center justify-between p-4 gap-4">
                 <CreateAccountForm
+                  className="flex-grow"
                   createAccountData={{
                     email: state.email,
                     cardParams:

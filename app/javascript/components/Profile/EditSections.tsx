@@ -178,12 +178,12 @@ export const EditorMenu = ({
           {activeSubmenu}
         </div>
       ) : (
-        <div className="stack" style={{ width: "300px" }}>
+        <div className="grid bg-background border border-border rounded-sm w-76">
           {items.map((item, key) =>
             isSubmenu(item) ? (
-              <button onClick={() => setMenuState(key)} key={key}>
-                <h5>{item.props.heading}</h5>
-                <div>
+              <button className="flex flex-wrap items-center justify-between p-4 gap-4" onClick={() => setMenuState(key)} key={key}>
+                <h5 className="flex-grow font-bold">{item.props.heading}</h5>
+                <div className="flex-grow">
                   {item.props.text} <Icon name="outline-cheveron-right" />
                 </div>
               </button>

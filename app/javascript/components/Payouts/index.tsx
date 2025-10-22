@@ -350,29 +350,29 @@ const Period = ({ payoutPeriodData }: { payoutPeriodData: PayoutPeriodData }) =>
           </WithTooltip>
         ) : null}
       </div>
-      <div className="stack" style={{ marginTop: "var(--spacer-4)" }}>
-        <div>
-          <h4>Sales</h4>
+      <div className="grid bg-background border border-border rounded-sm" style={{ marginTop: "var(--spacer-4)" }}>
+        <div className="flex flex-wrap items-center justify-between p-4 gap-4">
+          <h4 className="flex-grow font-bold">Sales</h4>
           <div>{formatDollarAmount(payoutPeriodData.sales_cents)}</div>
         </div>
         {payoutPeriodData.credits_cents > 0 ? (
-          <div>
-            <h4>Credits</h4>
-            <div>{formatDollarAmount(payoutPeriodData.credits_cents)}</div>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">Credits</h4>
+            <div className="flex-grow">{formatDollarAmount(payoutPeriodData.credits_cents)}</div>
           </div>
         ) : null}
         {payoutPeriodData.affiliate_credits_cents !== 0 ? (
-          <div>
-            <h4>Affiliate or collaborator fees received</h4>
-            <div>{formatDollarAmount(payoutPeriodData.affiliate_credits_cents)}</div>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">Affiliate or collaborator fees received</h4>
+            <div className="flex-grow">{formatDollarAmount(payoutPeriodData.affiliate_credits_cents)}</div>
           </div>
         ) : null}
         {payoutPeriodData.discover_fees_cents !== 0 || payoutPeriodData.direct_fees_cents !== 0 ? (
           <>
             {payoutPeriodData.discover_fees_cents !== 0 ? (
-              <div>
-                <div>
-                  <h4>
+              <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                <div className="flex-grow">
+                  <h4 className="flex-grow font-bold">
                     Discover sales{" "}
                     <a href="/help/article/66-gumroads-fees" target="_blank" rel="noreferrer">
                       fees
@@ -419,14 +419,14 @@ const Period = ({ payoutPeriodData }: { payoutPeriodData: PayoutPeriodData }) =>
           </div>
         )}
         {payoutPeriodData.refunds_cents !== 0 ? (
-          <div>
-            <h4>Refunds</h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">Refunds</h4>
             <div>{formatNegativeDollarAmount(payoutPeriodData.refunds_cents)}</div>
           </div>
         ) : null}
         {payoutPeriodData.chargebacks_cents !== 0 ? (
-          <div>
-            <h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">
               <a href="/help/article/134-how-does-gumroad-handle-chargebacks" target="_blank" rel="noreferrer">
                 Chargebacks
               </a>
@@ -435,8 +435,8 @@ const Period = ({ payoutPeriodData }: { payoutPeriodData: PayoutPeriodData }) =>
           </div>
         ) : null}
         {payoutPeriodData.credits_cents < 0 ? (
-          <div>
-            <h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">
               <a href="/help/article/269-balance-page" target="_blank" rel="noreferrer">
                 Credits
               </a>
@@ -445,20 +445,20 @@ const Period = ({ payoutPeriodData }: { payoutPeriodData: PayoutPeriodData }) =>
           </div>
         ) : null}
         {payoutPeriodData.loan_repayment_cents !== 0 ? (
-          <div>
-            <h4>Loan repayments</h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">Loan repayments</h4>
             <div>{formatNegativeDollarAmount(payoutPeriodData.loan_repayment_cents)}</div>
           </div>
         ) : null}
         {payoutPeriodData.affiliate_fees_cents !== 0 ? (
-          <div>
-            <h4>Affiliate or collaborator fees paid</h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">Affiliate or collaborator fees paid</h4>
             <div>{formatNegativeDollarAmount(payoutPeriodData.affiliate_fees_cents)}</div>
           </div>
         ) : null}
         {payoutPeriodData.paypal_payout_cents !== 0 ? (
-          <div>
-            <h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">
               <a href="/help/article/275-paypal-connect" target="_blank" rel="noreferrer">
                 PayPal payouts
               </a>
@@ -467,8 +467,8 @@ const Period = ({ payoutPeriodData }: { payoutPeriodData: PayoutPeriodData }) =>
           </div>
         ) : null}
         {payoutPeriodData.stripe_connect_payout_cents !== 0 ? (
-          <div>
-            <h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">
               <a href="/help/article/330-stripe-connect" target="_blank" rel="noreferrer">
                 Stripe Connect payouts
               </a>
@@ -477,8 +477,8 @@ const Period = ({ payoutPeriodData }: { payoutPeriodData: PayoutPeriodData }) =>
           </div>
         ) : null}
         {payoutPeriodData.taxes_cents !== 0 ? (
-          <div>
-            <h4>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h4 className="flex-grow font-bold">
               <a href="/help/article/121-sales-tax-on-gumroad" target="_blank" rel="noreferrer">
                 Taxes
               </a>

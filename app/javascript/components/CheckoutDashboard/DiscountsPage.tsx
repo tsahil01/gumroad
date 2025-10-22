@@ -479,55 +479,55 @@ const DiscountsPage = ({ offer_codes, pages, products, pagination: initialPagina
               <h2>{selectedOfferCode.name || selectedOfferCode.code.toUpperCase()}</h2>
               <button className="close" aria-label="Close" onClick={() => setSelectedOfferCodeId(null)} />
             </header>
-            <section className="stack">
+            <section className="grid bg-background border border-border rounded-sm">
               <h3>Details</h3>
-              <div>
-                <h5>Code</h5>
+              <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                <h5 className="flex-grow font-bold">Code</h5>
                 <div className="pill small">{selectedOfferCode.code.toUpperCase()}</div>
               </div>
-              <div>
-                <h5>Discount</h5>
+              <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                <h5 className="flex-grow font-bold">Discount</h5>
                 {formatAmount(selectedOfferCode)}
               </div>
               {selectedOfferCodeStatistics != null ? (
                 <>
-                  <div>
-                    <h5>Uses</h5>
+                  <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                    <h5 className="flex-grow font-bold">Uses</h5>
                     {formatUses(selectedOfferCodeStatistics.uses.total, selectedOfferCode.limit)}
                   </div>
-                  <div>
-                    <h5>Revenue</h5>
+                  <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                    <h5 className="flex-grow font-bold">Revenue</h5>
                     {formatRevenue(selectedOfferCodeStatistics.revenue_cents)}
                   </div>
                 </>
               ) : null}
               {selectedOfferCode.valid_at ? (
-                <div>
-                  <h5>Start date</h5>
+                <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                  <h5 className="flex-grow font-bold">Start date</h5>
                   {formatDateTime(new Date(selectedOfferCode.valid_at))}
                 </div>
               ) : null}
               {selectedOfferCode.expires_at ? (
-                <div>
-                  <h5>End date</h5>
+                <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                  <h5 className="flex-grow font-bold">End date</h5>
                   {formatDateTime(new Date(selectedOfferCode.expires_at))}
                 </div>
               ) : null}
               {selectedOfferCode.minimum_quantity !== null ? (
-                <div>
-                  <h5>Minimum quantity</h5>
+                <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                  <h5 className="flex-grow font-bold">Minimum quantity</h5>
                   {selectedOfferCode.minimum_quantity}
                 </div>
               ) : null}
               {(selectedOfferCode.products ?? products).some(({ is_tiered_membership }) => is_tiered_membership) ? (
-                <div>
-                  <h5>Discount duration for memberships</h5>
+                <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                  <h5 className="flex-grow font-bold">Discount duration for memberships</h5>
                   {selectedOfferCode.duration_in_billing_cycles === 1 ? "Once (first billing period only)" : "Forever"}
                 </div>
               ) : null}
               {selectedOfferCode.minimum_amount_cents !== null ? (
-                <div>
-                  <h5>Minimum amount</h5>
+                <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                  <h5 className="flex-grow font-bold">Minimum amount</h5>
                   {formatPriceCentsWithCurrencySymbol(
                     selectedOfferCode.currency_type,
                     selectedOfferCode.minimum_amount_cents,
@@ -539,17 +539,17 @@ const DiscountsPage = ({ offer_codes, pages, products, pagination: initialPagina
               ) : null}
             </section>
             {selectedOfferCode.products ? (
-              <section className="stack">
-                <h3>Products</h3>
+              <section className="grid bg-background border border-border rounded-sm">
+                <h3 className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">Products</h3>
                 {selectedOfferCode.products.map((product) => {
                   const uses =
                     selectedOfferCodeStatistics != null
                       ? (selectedOfferCodeStatistics.uses.products[product.id] ?? 0)
                       : null;
                   return (
-                    <div key={product.id} className="grid grid-cols-[1fr_auto] gap-2">
-                      <div>
-                        <h5>{product.name}</h5>
+                    <div key={product.id} className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                      <div className="flex-grow">
+                        <h5 className="font-bold">{product.name}</h5>
                         {uses != null ? `${uses} ${uses === 1 ? "use" : "uses"}` : null}
                       </div>
                       <CopyToClipboard

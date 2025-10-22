@@ -612,27 +612,27 @@ const AffiliateDetails = ({
         const productStatistics = statistics?.products[product.id];
 
         return (
-          <section key={product.id} className="stack">
-            <h3>{product.name}</h3>
+          <section key={product.id} className="grid bg-background border border-border rounded-sm">
+            <h3 className="flex flex-wrap items-center justify-between p-4 gap-4">{product.name}</h3>
             {statistics ? (
               <>
-                <div>
-                  <h5>Revenue</h5>
+                <div className="flex-grow">
+                  <h5 className="flex-grow font-bold">Revenue</h5>
                   {formattedSalesVolumeAmount(productStatistics?.volume_cents ?? 0)}
                 </div>
                 <div>
-                  <h5>Sales</h5>
+                  <h5 className="flex-grow font-bold">Sales</h5>
                   {productStatistics?.sales_count ?? 0}
                 </div>
               </>
             ) : null}
-            <div>
-              <h5>Commission</h5>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <h5 className="flex-grow font-bold">Commission</h5>
               {((product.fee_percent ?? 0) / 100).toLocaleString([], { style: "percent" })}
             </div>
-            <div>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
               <CopyToClipboard tooltipPosition="bottom" copyTooltip="Copy link" text={product.referral_url}>
-                <Button>Copy link</Button>
+                <Button className="flex-1 basis-0">Copy link</Button>
               </CopyToClipboard>
             </div>
           </section>

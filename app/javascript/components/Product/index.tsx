@@ -579,12 +579,12 @@ export const Product = ({
             </div>
           ) : null}
           {product.summary || product.attributes.length > 0 ? (
-            <div className="stack">
-              {product.summary ? <p>{product.summary}</p> : null}
+            <div className="grid bg-background border border-border rounded-sm">
+              {product.summary ? <p className="flex flex-wrap items-center justify-between p-4 gap-4">{product.summary}</p> : null}
               {product.attributes.map(({ name, value }, idx) => (
-                <div key={idx}>
-                  <h5>{name}</h5>
-                  <div>{value}</div>
+                <div key={idx} className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+                  <h5 className="flex-grow font-bold">{name}</h5>
+                  <div className="flex-grow">{value}</div>
                 </div>
               ))}
             </div>
@@ -645,15 +645,16 @@ const ExistingPurchaseStack = ({
 
   return (
     <section>
-      <div className="stack">
+      <div className="grid bg-background border border-border rounded-sm">
         {purchase.membership ? (
           <>
-            <div>
-              <h5>{purchase.membership.tier_name}</h5>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4">
+              <h5 className="flex-grow font-bold">{purchase.membership.tier_name}</h5>
               {purchase.total_price_including_tax_and_shipping}
             </div>
-            <div>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
               <NavigationButton
+                className="flex-grow basis-0"
                 href={purchase.membership.manage_url}
                 target="_blank"
                 onClick={() =>
@@ -669,8 +670,8 @@ const ExistingPurchaseStack = ({
             </div>
           </>
         ) : (
-          <li>
-            <h3>
+          <li className="flex flex-wrap items-center justify-between p-4 gap-4">
+            <h3 className="flex-grow">
               {isBundle
                 ? purchase.is_gift_receiver_purchase
                   ? "You've received this bundle as a gift"

@@ -22,9 +22,9 @@ export const ProductsPopover = ({
       </span>
     }
   >
-    <div className="stack">
-      <div>
-        <fieldset>
+    <div className="grid bg-background border border-border rounded-sm">
+      <div className="flex flex-wrap items-center justify-between p-4 gap-4">
+        <fieldset className="flex-grow basis-0">
           <label>
             <input
               type="checkbox"
@@ -57,8 +57,8 @@ export const ProductsPopover = ({
           ))}
         </fieldset>
       </div>
-      <div>
-        <Button
+      <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+        <Button className="flex-grow basis-0"
           onClick={() =>
             setProducts((prevProducts) => prevProducts.map((product) => ({ ...product, selected: !product.selected })))
           }

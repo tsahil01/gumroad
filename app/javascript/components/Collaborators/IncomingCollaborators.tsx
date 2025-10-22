@@ -21,6 +21,7 @@ import Placeholder from "$app/components/ui/Placeholder";
 import { WithTooltip } from "$app/components/WithTooltip";
 
 import placeholder from "$assets/images/placeholders/collaborators.png";
+import { classNames } from "$app/utils/classNames";
 
 const formatProductNames = (incomingCollaborator: IncomingCollaborator) => {
   if (incomingCollaborator.products.length === 0) {
@@ -77,21 +78,21 @@ const IncomingCollaboratorDetails = ({
         <button className="close" aria-label="Close" onClick={onClose} />
       </header>
 
-      <section className="stack">
+      <section className="grid bg-background border border-border rounded-sm">
         <h3>Email</h3>
-        <div>
-          <span>{selected.seller_email}</span>
+        <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+          <span className="flex-grow">{selected.seller_email}</span>
         </div>
       </section>
 
-      <section className="stack">
+      <section className="grid bg-background border border-border rounded-sm">
         <h3>Products</h3>
-        {selected.products.map((product) => (
-          <section key={product.id}>
-            <a href={product.url} target="_blank" rel="noreferrer">
+        {selected.products.map((product, i) => (
+          <section key={product.id} className={classNames("flex flex-wrap items-center justify-between p-4 gap-4", i > 0 && "border-t border-border")}>
+            <a className="flex-grow" href={product.url} target="_blank" rel="noreferrer">
               {product.name}
             </a>
-            <div>{formatAsPercent(product.affiliate_percentage)}</div>
+            <div className="flex-grow">{formatAsPercent(product.affiliate_percentage)}</div>
           </section>
         ))}
       </section>

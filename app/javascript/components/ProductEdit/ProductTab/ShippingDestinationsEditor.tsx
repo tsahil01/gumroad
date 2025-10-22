@@ -6,6 +6,7 @@ import { PriceInput } from "$app/components/PriceInput";
 import { ShippingDestination, useProductEditContext } from "$app/components/ProductEdit/state";
 import Placeholder from "$app/components/ui/Placeholder";
 import { WithTooltip } from "$app/components/WithTooltip";
+import { classNames } from "$app/utils/classNames";
 
 export const ShippingDestinationsEditor = ({
   shippingDestinations,
@@ -34,9 +35,10 @@ export const ShippingDestinationsEditor = ({
         <h2>Shipping destinations</h2>
       </header>
       {shippingDestinations.length > 0 ? (
-        <div className="stack">
+        <div className="grid bg-background border border-border rounded-sm">
           {shippingDestinations.map((shippingDestination, index) => (
             <ShippingDestinationRow
+            className={classNames("flex flex-wrap items-center justify-between p-4 gap-4", index > 0 && "border-t border-border")}
               shippingDestination={shippingDestination}
               onChange={(updatedShippingDestination) =>
                 onChange([
@@ -73,10 +75,12 @@ export const ShippingDestinationsEditor = ({
 const INSERT_DIVIDERS_AFTER_CODES = ["US", "NORTH AMERICA", "ELSEWHERE"];
 
 const ShippingDestinationRow = ({
+  className,
   shippingDestination,
   onChange,
   onRemove,
 }: {
+  className?: string;
   shippingDestination: ShippingDestination;
   onChange: (shippingDestination: ShippingDestination) => void;
   onRemove: () => void;
@@ -87,7 +91,7 @@ const ShippingDestinationRow = ({
   const updateDestination = (update: Partial<ShippingDestination>) => onChange({ ...shippingDestination, ...update });
 
   return (
-    <div aria-label="Shipping destination">
+    <div aria-label="Shipping destination" className={className}>
       <fieldset className="input-with-button">
         <legend>
           <label htmlFor={`${uid}-country`}>Country</label>

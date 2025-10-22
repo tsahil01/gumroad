@@ -86,9 +86,9 @@ export const FileInput = ({ customFieldId }: { customFieldId: string }) => {
   );
 
   return files.length ? (
-    <div className="stack">
-      <div>
-        <div role="tree">
+    <div className="grid bg-background border border-border rounded-sm">
+      <div className="flex flex-wrap items-center justify-between p-4 gap-4">
+        <div role="tree" className="flex-grow">
           {files.map((file, index) => (
             <div key={index} role="treeitem">
               <div className="content">
@@ -105,7 +105,7 @@ export const FileInput = ({ customFieldId }: { customFieldId: string }) => {
           ))}
         </div>
       </div>
-      <div style={{ justifyContent: "center" }}>{fileUpload}</div>
+      <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">{fileUpload}</div>
     </div>
   ) : (
     <Placeholder>

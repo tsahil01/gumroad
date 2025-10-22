@@ -40,6 +40,7 @@ import { useDebouncedCallback } from "$app/components/useDebouncedCallback";
 import { Sort, useSortingTableDriver } from "$app/components/useSortingTableDriver";
 
 import placeholder from "$assets/images/placeholders/upsells.png";
+import { classNames } from "$app/utils/classNames";
 
 type Variant = {
   id: string;
@@ -398,15 +399,15 @@ const UpsellDrawer = ({
         <h2>{selectedUpsell.name}</h2>
         <button className="close" aria-label="Close" onClick={onClose} />
       </header>
-      <section className="stack">
+      <section className="grid bg-background border border-border rounded-sm">
         <h3>Details</h3>
-        <div>
-          <h5>Offer text</h5>
+        <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+          <h5 className="flex-grow font-bold">Offer text</h5>
           {selectedUpsell.text}
         </div>
         {selectedUpsell.discount ? (
-          <div>
-            <h5>Discount</h5>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h5 className="flex-grow font-bold">Discount</h5>
             {selectedUpsell.discount.type === "percent"
               ? `${selectedUpsell.discount.percents}%`
               : formatPriceCentsWithCurrencySymbol(
@@ -420,12 +421,12 @@ const UpsellDrawer = ({
         ) : null}
         {statistics ? (
           <>
-            <div>
-              <h5>Uses</h5>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+              <h5 className="flex-grow font-bold">Uses</h5>
               {statistics.uses.total}
             </div>
-            <div>
-              <h5>Revenue</h5>
+            <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h5 className="flex-grow font-bold">Revenue</h5>
               {formatPriceCentsWithCurrencySymbol(selectedUpsell.product.currency_type, statistics.revenue_cents, {
                 symbolFormat: "short",
               })}
@@ -443,7 +444,7 @@ const UpsellDrawer = ({
         </Button>
       </section>
       {selectedUpsell.cross_sell ? (
-        <section className="stack">
+        <section className="grid bg-background border border-border rounded-sm">
           <h3>Selected products</h3>
           {selectedUpsell.universal ? (
             <div>
@@ -463,27 +464,27 @@ const UpsellDrawer = ({
           )}
         </section>
       ) : (
-        <section className="stack">
+        <section className="grid bg-background border border-border rounded-sm">
           <h3>Selected product</h3>
-          <div>
-            <h5>{selectedUpsell.product.name}</h5>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h5 className="flex-grow font-bold">{selectedUpsell.product.name}</h5>
           </div>
         </section>
       )}
       {selectedUpsell.cross_sell ? (
-        <section className="stack">
+        <section className="grid bg-background border border-border rounded-sm">
           <h3>Offered product</h3>
-          <div>
-            <h5>{formatOfferedProductName(selectedUpsell.product.name, selectedUpsell.product.variant?.name)}</h5>
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <h5 className="flex-grow font-bold">{formatOfferedProductName(selectedUpsell.product.name, selectedUpsell.product.variant?.name)}</h5>
           </div>
         </section>
       ) : (
-        <section className="stack">
+        <section className="grid bg-background border border-border rounded-sm">
           <h3>Offers</h3>
-          {selectedUpsell.upsell_variants.map((upsellVariant) => (
-            <div key={upsellVariant.id}>
-              <div>
-                <h5>{`${upsellVariant.selected_variant.name} → ${upsellVariant.offered_variant.name}`}</h5>
+          {selectedUpsell.upsell_variants.map((upsellVariant, i) => (
+            <div className={classNames("flex flex-wrap items-center justify-between p-4 gap-4", i > 0 && "border-t border-border")} key={upsellVariant.id}>
+              <div className="flex-grow">
+                <h5 className="font-bold">{`${upsellVariant.selected_variant.name} → ${upsellVariant.offered_variant.name}`}</h5>
                 {statistics
                   ? `${statistics.uses.upsell_variants[upsellVariant.id] ?? 0} ${(statistics.uses.upsell_variants[upsellVariant.id] ?? 0) === 1 ? "use" : "uses"}`
                   : null}

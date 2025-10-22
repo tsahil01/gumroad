@@ -15,6 +15,8 @@ import { VideoState, ReviewVideoRecorderUiState } from "$app/components/ReviewFo
 import { useReviewVideoUploader } from "$app/components/ReviewForm/useReviewVideoUploader";
 import { showAlert } from "$app/components/server-components/Alert";
 
+import { classNames } from "$app/utils/classNames";
+
 export type Review = {
   rating: number;
   message: string | null;
@@ -94,6 +96,7 @@ const gracefullyGenerateAndUploadThumbnail = async (videoFile: File): Promise<st
 export const ReviewForm = React.forwardRef<
   HTMLTextAreaElement,
   {
+    className?: string;
     permalink: string;
     purchaseId: string;
     purchaseEmailDigest?: string;
@@ -103,7 +106,7 @@ export const ReviewForm = React.forwardRef<
     disabledStatus?: string | null;
     style?: React.CSSProperties;
   }
->(({ permalink, purchaseId, purchaseEmailDigest, review, onChange, preview, disabledStatus, style }, ref) => {
+>(({ className, permalink, purchaseId, purchaseEmailDigest, review, onChange, preview, disabledStatus, style }, ref) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [rating, setRating] = React.useState<number | null>(review?.rating ?? null);
   const [message, setMessage] = React.useState(review?.message ?? "");
@@ -319,7 +322,7 @@ export const ReviewForm = React.forwardRef<
   );
 
   return (
-    <form onSubmit={(event) => void handleSubmit(event)} style={style} className="flex flex-col items-start!">
+    <form onSubmit={(event) => void handleSubmit(event)} style={style} className={classNames("flex flex-col items-start!", className)}>
       {error ? <p className="text-red"> {error} </p> : null}
       <div className="flex flex-wrap justify-between gap-2">
         <label htmlFor={uid}>{viewing ? "Your rating:" : "Liked it? Give it a rating:"}</label>

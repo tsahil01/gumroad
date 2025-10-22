@@ -223,8 +223,8 @@ const ProductEligibilitySection = ({
       </fieldset>
       {result.isLoading ? <LoadingSpinner /> : null}
       {result.product ? (
-        <div className="stack">
-          <div>
+        <div className="grid bg-background border border-border rounded-sm">
+          <div className="flex flex-wrap items-center justify-between p-4 gap-4">
             <a href={result.product.short_url} target="_blank" rel="noreferrer">
               {result.product.name}
             </a>

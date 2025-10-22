@@ -96,19 +96,19 @@ const CollaboratorDetails = ({
         </div>
       ) : null}
 
-      <section className="stack">
+      <section className="grid bg-background border border-border rounded-sm">
         <h3>Email</h3>
-        <div>
+        <div className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
           <span>{selectedCollaborator.email}</span>
         </div>
       </section>
 
-      <section className="stack">
+      <section className="grid bg-background border border-border rounded-sm">
         <h3>Products</h3>
-        {selectedCollaborator.products.map((product) => (
-          <section key={product.id}>
-            <div>{product.name}</div>
-            <div>{formatAsPercent(product.percent_commission || selectedCollaborator.percent_commission || 0)}</div>
+        {selectedCollaborator.products.map((product, i) => (
+          <section key={product.id} className="flex flex-wrap items-center justify-between p-4 gap-4 border-t border-border">
+            <div className="flex-grow">{product.name}</div>
+            <div className="flex-grow">{formatAsPercent(product.percent_commission || selectedCollaborator.percent_commission || 0)}</div>
           </section>
         ))}
       </section>
