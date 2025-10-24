@@ -325,7 +325,7 @@ export const ReviewForm = React.forwardRef<
   );
 
   return (
-    <form onSubmit={(event) => void handleSubmit(event)} style={style} className={classNames("flex flex-col items-start!", className)}>
+    <form onSubmit={(event) => void handleSubmit(event)} style={style} className="flex flex-col items-start!">
       {error ? <p className="text-red"> {error} </p> : null}
       <div className="flex flex-wrap justify-between gap-2">
         <label htmlFor={uid}>{viewing ? "Your rating:" : "Liked it? Give it a rating:"}</label>
