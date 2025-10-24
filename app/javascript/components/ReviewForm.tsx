@@ -8,6 +8,7 @@ import { assertResponseError } from "$app/utils/request";
 import { summarizeUploadProgress } from "$app/utils/summarizeUploadProgress";
 
 import { Button } from "$app/components/Button";
+import { useAppDomain } from "$app/components/DomainSettings";
 import { useLoggedInUser } from "$app/components/LoggedInUser";
 import { RatingSelector } from "$app/components/RatingSelector";
 import { ReviewVideoRecorder } from "$app/components/ReviewForm/ReviewVideoRecorder";
@@ -106,7 +107,8 @@ export const ReviewForm = React.forwardRef<
     disabledStatus?: string | null;
     style?: React.CSSProperties;
   }
->(({ className, permalink, purchaseId, purchaseEmailDigest, review, onChange, preview, disabledStatus, style }, ref) => {
+>(({ permalink, purchaseId, purchaseEmailDigest, review, onChange, preview, disabledStatus, style }, ref) => {
+  const appDomain = useAppDomain();
   const [isLoading, setIsLoading] = React.useState(false);
   const [rating, setRating] = React.useState<number | null>(review?.rating ?? null);
   const [message, setMessage] = React.useState(review?.message ?? "");
@@ -279,7 +281,7 @@ export const ReviewForm = React.forwardRef<
         videoState.kind === "recorded" ? videoState.file.size : 0,
       )}{" "}
       -{" "}
-      <button onClick={cancelUpload} type="button" className="link">
+      <button onClick={cancelUpload} type="button" className="underline">
         Cancel
       </button>
     </div>
@@ -300,8 +302,9 @@ export const ReviewForm = React.forwardRef<
     </>
   ) : (
     <div>
-      <a href={Routes.login_path()}>Log in</a> or <a href={Routes.signup_path()}>create an account</a> using the same
-      email address as your purchase to upload a video review.
+      <a href={Routes.login_url({ host: appDomain })}>Log in</a> or{" "}
+      <a href={Routes.signup_url({ host: appDomain })}>create an account</a> using the same email address as your
+      purchase to upload a video review.
     </div>
   );
 
