@@ -1,7 +1,7 @@
 import { useForm, usePage } from "@inertiajs/react";
 import React from "react";
 
-import { showAlert } from "$app/components/server-components/Alert";
+import CodeSnippet from "$app/components/ui/CodeSnippet";
 
 type PageProps = {
   authenticity_token: string;
@@ -36,10 +36,7 @@ const SuspendUsers = () => {
     event.preventDefault();
 
     form.put(Routes.admin_suspend_users_path(), {
-      onSuccess: () => {
-        showAlert("User suspension in progress!", "success");
-        form.reset();
-      },
+      onSuccess: () => form.reset(),
     });
   };
 
@@ -52,21 +49,15 @@ const SuspendUsers = () => {
           newline.
         </header>
 
-        <figure className="code">
-          <figcaption>Example with comma-separated items</figcaption>
-          <pre>3322133, 3738461, 4724778</pre>
-        </figure>
+        <CodeSnippet caption="Example with comma-separated items">3322133, 3738461, 4724778</CodeSnippet>
 
-        <figure className="code">
-          <figcaption>Example with items separated by newline</figcaption>
-          <pre>
-            3322133
-            <br />
-            3738461
-            <br />
-            4724778
-          </pre>
-        </figure>
+        <CodeSnippet caption="Example with items separated by newline">
+          3322133
+          <br />
+          3738461
+          <br />
+          4724778
+        </CodeSnippet>
 
         <textarea
           id="identifiers"

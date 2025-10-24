@@ -1,16 +1,15 @@
 import { useForm, usePage } from "@inertiajs/react";
 import React from "react";
 
-import { showAlert } from "$app/components/server-components/Alert";
+import CodeSnippet from "$app/components/ui/CodeSnippet";
 
 export type Props = {
   action: string;
   header: string;
   buttonLabel: string;
-  noticeMessage: string;
 };
 
-const Form = ({ action, header, buttonLabel, noticeMessage }: Props) => {
+const Form = ({ action, header, buttonLabel }: Props) => {
   const { authenticity_token } = usePage<{ authenticity_token: string }>().props;
 
   const form = useForm({
@@ -23,12 +22,7 @@ const Form = ({ action, header, buttonLabel, noticeMessage }: Props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    form.put(action, {
-      onSuccess: () => {
-        showAlert(noticeMessage, "success");
-        form.reset();
-      },
-    });
+    form.put(action, { only: ["flash"], onSuccess: () => form.reset() });
   };
 
   const setIdentifiers = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,21 +41,17 @@ const Form = ({ action, header, buttonLabel, noticeMessage }: Props) => {
           <code>john@list.example.org</code>, enter what is to the right of the <code>@</code> character.
         </p>
 
-        <figure className="code">
-          <figcaption>Example with comma-separated items</figcaption>
-          <pre>example.com, example.net, list.example.org</pre>
-        </figure>
+        <CodeSnippet caption="Example with comma-separated items">
+          example.com, example.net, list.example.org
+        </CodeSnippet>
 
-        <figure className="code">
-          <figcaption>Example with items separated by newline</figcaption>
-          <pre>
-            example.com
-            <br />
-            example.net
-            <br />
-            list.example.org
-          </pre>
-        </figure>
+        <CodeSnippet caption="Example with items separated by newline">
+          example.com
+          <br />
+          example.net
+          <br />
+          list.example.org
+        </CodeSnippet>
 
         <textarea
           id="identifiers"
