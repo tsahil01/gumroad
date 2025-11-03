@@ -7,7 +7,7 @@ import { assertDefined } from "$app/utils/assert";
 import { Icon } from "$app/components/Icons";
 import { WithTooltip } from "$app/components/WithTooltip";
 
-const statsVariants = cva("text-4xl leading-tight p-8 border border-border rounded inline-grid content-between gap-2 bg-background text-foreground",{
+const statsVariants = cva("text-4xl leading-tight p-8 border border-border rounded grid content-between gap-2 bg-background",{
     variants: {
       variant: {
         success: "text-green",
@@ -52,7 +52,7 @@ export const Stats = ({
 
   return (
     <section className={classNames(statsVariants({ variant }), className)}>
-      <h2 className="flex gap-2 text-base leading-normal">
+      <h2 className="flex gap-2 text-base">
         {title}
         {description ? (
           <WithTooltip tip={description} position="top">
