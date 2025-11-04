@@ -67,7 +67,7 @@ export const Stats = ({
         ) : null}
       </h2>
       <div ref={containerRef} className="overflow-hidden break-words">
-      <span style={adjustedFontSize ? { fontSize: adjustedFontSize } : undefined}>{value ?? "-"}</span>
+        <span style={adjustedFontSize ? { fontSize: adjustedFontSize } : undefined}>{value ?? "-"}</span>
       </div>
     </section>
   );
