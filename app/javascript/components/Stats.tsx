@@ -1,13 +1,15 @@
 import { cva } from "class-variance-authority";
-import { classNames } from "$app/utils/classNames";
 import * as React from "react";
 
 import { assertDefined } from "$app/utils/assert";
+import { classNames } from "$app/utils/classNames";
 
 import { Icon } from "$app/components/Icons";
 import { WithTooltip } from "$app/components/WithTooltip";
 
-const statsVariants = cva("text-4xl leading-tight p-8 border border-border rounded grid content-between gap-2 bg-background",{
+const statsVariants = cva(
+  "text-4xl leading-tight p-8 border border-border rounded grid content-between gap-2 bg-background",
+  {
     variants: {
       variant: {
         success: "text-green",
@@ -16,7 +18,7 @@ const statsVariants = cva("text-4xl leading-tight p-8 border border-border round
         info: "text-purple",
       },
     },
-  }
+  },
 );
 
 export const Stats = ({
