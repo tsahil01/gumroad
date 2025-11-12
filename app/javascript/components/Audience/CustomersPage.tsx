@@ -554,10 +554,7 @@ const CustomersPage = ({
             ) : null}
           </section>
         ) : (
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             {searchQuery !== null ? (
               <h2>No sales found</h2>
             ) : (

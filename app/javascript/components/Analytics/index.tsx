@@ -205,10 +205,7 @@ const Analytics = ({ products: initialProducts, country_codes, state_names }: An
         </div>
       ) : (
         <div className="p-4 md:p-8">
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             <h2>You're just getting started.</h2>
             <p>
               You don't have any sales yet. Once you do, you'll see them here, along with powerful data that can help

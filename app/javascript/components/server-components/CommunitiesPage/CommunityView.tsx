@@ -861,10 +861,7 @@ const GoBackHeader = () => {
 const EmptyCommunitiesPlaceholder = ({ hasProducts }: { hasProducts: boolean }) => (
   <div>
     <section>
-      <Placeholder>
-        <figure>
-          <img src={placeholderImage} />
-        </figure>
+      <Placeholder imgSrc={placeholderImage}>
         <h2>Build your community, one product at a time!</h2>
         <p className="max-w-prose">
           When you publish a product, we automatically create a dedicated community chat—your own space to connect with

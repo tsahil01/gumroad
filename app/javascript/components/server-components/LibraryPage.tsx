@@ -342,12 +342,7 @@ const LibraryPage = ({ results, creators, bundles, reviews_page_enabled, followi
     >
       <section className="space-y-4 p-4 md:p-8">
         {state.results.length === 0 || showArchivedNotice ? (
-          <Placeholder>
-            {state.results.length === 0 ? (
-              <figure>
-                <img src={placeholder} />
-              </figure>
-            ) : null}
+          <Placeholder {...(state.results.length === 0 ? { imgSrc: placeholder } : {})}>
             {state.results.length === 0 ? (
               <>
                 <h2 className="library-header">You haven't bought anything... yet!</h2>

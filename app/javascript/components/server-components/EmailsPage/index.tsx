@@ -162,10 +162,7 @@ export const EmptyStatePlaceholder = ({
   description: string;
   placeholderImage: string;
 }) => (
-  <Placeholder>
-    <figure>
-      <img src={placeholderImage} />
-    </figure>
+  <Placeholder imgSrc={placeholderImage}>
     <h2>{title}</h2>
     <p>{description}</p>
     <NewEmailButton />

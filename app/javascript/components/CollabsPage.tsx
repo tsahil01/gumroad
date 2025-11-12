@@ -45,10 +45,7 @@ const CollabsPage = ({
     <ProductsLayout selectedTab="collabs" title="Products" archivedTabVisible={archivedTabVisible}>
       <section className="p-4 md:p-8">
         {memberships.length === 0 && products.length === 0 ? (
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             <h2>Create your first collab!</h2>
             Offer a product in collaboration with another Gumroad creator to grow your audience.
             <WithTooltip position="top" tip={collaboratorsDisabledReason}>

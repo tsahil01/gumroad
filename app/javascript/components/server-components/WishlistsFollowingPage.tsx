@@ -95,10 +95,7 @@ const WishlistsFollowingPage = ({
             </tbody>
           </table>
         ) : (
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             <h2>Follow wishlists that inspire you</h2>
             Bookmark and organize your desired products with ease
             <a href="/help/article/343-wishlists" target="_blank" rel="noreferrer">

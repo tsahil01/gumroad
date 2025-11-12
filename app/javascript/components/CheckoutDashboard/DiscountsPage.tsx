@@ -458,10 +458,7 @@ const DiscountsPage = ({ offer_codes, pages, products, pagination: initialPagina
             ) : null}
           </section>
         ) : (
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             <div>
               <h2>No discounts yet</h2>
               <p>Use discounts to create sweet deals for your customers</p>

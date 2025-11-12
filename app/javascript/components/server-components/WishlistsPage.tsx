@@ -131,10 +131,7 @@ const WishlistsPage = ({
             </tbody>
           </table>
         ) : (
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             <h2>Save products you are wishing for</h2>
             Bookmark and organize your desired products with ease
             <a href="/help/article/343-wishlists" target="_blank" rel="noreferrer">

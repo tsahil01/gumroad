@@ -304,19 +304,13 @@ const UtmLinkList = () => {
         </section>
       ) : query ? (
         <div className="p-4 md:p-8">
-          <Placeholder>
-            <figure>
-              <img src={noLinksFoundPlaceholder} />
-            </figure>
+          <Placeholder imgSrc={noLinksFoundPlaceholder}>
             <h4>No links found for "{query}"</h4>
           </Placeholder>
         </div>
       ) : (
         <div className="p-4 md:p-8">
-          <Placeholder>
-            <figure>
-              <img src={noLinksYetPlaceholder} />
-            </figure>
+          <Placeholder imgSrc={noLinksYetPlaceholder}>
             <h2>No links yet</h2>
             <h4>Use UTM links to track which sources are driving the most conversions and revenue</h4>
 

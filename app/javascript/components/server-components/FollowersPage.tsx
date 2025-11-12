@@ -230,10 +230,7 @@ export const FollowersPage = ({ followers: initialFollowers, per_page, total }: 
             ) : null}
           </div>
         ) : (
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             {searchQuery.length === 0 ? (
               <>
                 <h2>Manage all of your followers in one place.</h2>

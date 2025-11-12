@@ -269,10 +269,7 @@ const Collaborators = () => {
         </>
       ) : (
         <section className="p-4 md:p-8">
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             <h2>No collaborators yet</h2>
             <h4>Share your revenue with the people who helped create your products.</h4>
             <a href="/help/article/341-collaborations" target="_blank" rel="noreferrer">

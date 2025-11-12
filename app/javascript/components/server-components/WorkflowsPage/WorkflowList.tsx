@@ -92,10 +92,7 @@ const WorkflowList = () => {
         </div>
       ) : (
         <div className="p-4 md:p-8">
-          <Placeholder>
-            <figure>
-              <img src={placeholder} />
-            </figure>
+          <Placeholder imgSrc={placeholder}>
             <h2>Automate emails with ease.</h2>
             <h4>Workflows allow you to send scheduled emails to a subset of your audience based on a trigger.</h4>
             {newWorkflowButton}

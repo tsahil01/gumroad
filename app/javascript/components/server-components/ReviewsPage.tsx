@@ -131,10 +131,7 @@ const ReviewsPage = ({
       ) : null}
       <section className="p-4 md:p-8">
         {reviews.length === 0 && purchases.length === 0 ? (
-          <Placeholder>
-            <figure>
-              <img src={placeholderImage} />
-            </figure>
+          <Placeholder imgSrc={placeholderImage}>
             <h2>You haven't bought anything... yet!</h2>
             Once you do, it'll show up here so you can review them.
             <NavigationButton href={discoverUrl} color="accent">

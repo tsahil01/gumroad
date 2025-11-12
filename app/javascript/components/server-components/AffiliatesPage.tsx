@@ -574,10 +574,7 @@ const AffiliatesTab = () => {
                 ) : null}
               </>
             ) : (
-              <Placeholder>
-                <figure>
-                  <img src={placeholder} />
-                </figure>
+              <Placeholder imgSrc={placeholder}>
                 <h2>No affiliates found</h2>
               </Placeholder>
             )}
