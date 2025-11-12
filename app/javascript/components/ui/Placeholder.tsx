@@ -21,7 +21,7 @@ const Placeholder: React.FC<PlaceholderProps> = ({ className, children, imgSrc, 
   >
     {imgSrc && (
       <figure className="w-full">
-        <img src={imgSrc} className="h-auto w-full" />
+        <img src={imgSrc} className="w-full" />
       </figure>
     )}
     {children}
