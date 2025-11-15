@@ -27,7 +27,7 @@ import { EmailForm } from "$app/components/server-components/EmailsPage/EmailFor
 import { PublishedTab } from "$app/components/server-components/EmailsPage/PublishedTab";
 import { ScheduledTab } from "$app/components/server-components/EmailsPage/ScheduledTab";
 import { PageHeader } from "$app/components/ui/PageHeader";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { Tabs, Tab } from "$app/components/ui/Tabs";
 import { WithTooltip } from "$app/components/WithTooltip";
 const TABS = ["published", "scheduled", "drafts", "subscribers"] as const;
@@ -162,7 +162,8 @@ export const EmptyStatePlaceholder = ({
   description: string;
   placeholderImage: string;
 }) => (
-  <Placeholder imgSrc={placeholderImage}>
+  <Placeholder>
+    <PlaceholderImage src={placeholderImage} />
     <h2>{title}</h2>
     <p>{description}</p>
     <NewEmailButton />

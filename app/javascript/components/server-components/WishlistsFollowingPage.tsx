@@ -9,7 +9,7 @@ import { Icon } from "$app/components/Icons";
 import { Layout } from "$app/components/Library/Layout";
 import { Popover } from "$app/components/Popover";
 import { showAlert } from "$app/components/server-components/Alert";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 
 import placeholder from "$assets/images/placeholders/wishlists-following.png";
 
@@ -95,7 +95,8 @@ const WishlistsFollowingPage = ({
             </tbody>
           </table>
         ) : (
-          <Placeholder imgSrc={placeholder}>
+          <Placeholder>
+            <PlaceholderImage src={placeholder} />
             <h2>Follow wishlists that inspire you</h2>
             Bookmark and organize your desired products with ease
             <a href="/help/article/343-wishlists" target="_blank" rel="noreferrer">

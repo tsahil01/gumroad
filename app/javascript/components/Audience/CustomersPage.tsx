@@ -76,7 +76,7 @@ import { Select } from "$app/components/Select";
 import { showAlert } from "$app/components/server-components/Alert";
 import { Toggle } from "$app/components/Toggle";
 import { PageHeader } from "$app/components/ui/PageHeader";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { useDebouncedCallback } from "$app/components/useDebouncedCallback";
 import { useOnChange } from "$app/components/useOnChange";
 import { useUserAgentInfo } from "$app/components/UserAgent";
@@ -554,7 +554,8 @@ const CustomersPage = ({
             ) : null}
           </section>
         ) : (
-          <Placeholder imgSrc={placeholder}>
+          <Placeholder>
+            <PlaceholderImage src={placeholder} />
             {searchQuery !== null ? (
               <h2>No sales found</h2>
             ) : (

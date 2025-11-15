@@ -17,7 +17,7 @@ import { Icon } from "$app/components/Icons";
 import { LoadingSpinner } from "$app/components/LoadingSpinner";
 import { useLoggedInUser } from "$app/components/LoggedInUser";
 import { showAlert } from "$app/components/server-components/Alert";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { WithTooltip } from "$app/components/WithTooltip";
 
 import placeholder from "$assets/images/placeholders/collaborators.png";
@@ -181,7 +181,8 @@ const TableRowLoadingSpinner = () => (
 
 const EmptyState = () => (
   <section className="p-4 md:p-8">
-    <Placeholder imgSrc={placeholder}>
+    <Placeholder>
+      <PlaceholderImage src={placeholder} />
       <h2>No collaborations yet</h2>
       <h4>Creators who have invited you to collaborate on their products will appear here.</h4>
       <a href="/help/article/341-collaborations" target="_blank" rel="noreferrer">

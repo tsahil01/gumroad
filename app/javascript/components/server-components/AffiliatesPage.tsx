@@ -54,7 +54,7 @@ import { Pagination } from "$app/components/Pagination";
 import { Popover } from "$app/components/Popover";
 import { showAlert } from "$app/components/server-components/Alert";
 import { PageHeader } from "$app/components/ui/PageHeader";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { Tabs, Tab } from "$app/components/ui/Tabs";
 import { useDebouncedCallback } from "$app/components/useDebouncedCallback";
 import { useLocalPagination } from "$app/components/useLocalPagination";
@@ -574,7 +574,8 @@ const AffiliatesTab = () => {
                 ) : null}
               </>
             ) : (
-              <Placeholder imgSrc={placeholder}>
+              <Placeholder>
+                <PlaceholderImage src={placeholder} />
                 <h2>No affiliates found</h2>
               </Placeholder>
             )}

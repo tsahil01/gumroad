@@ -24,7 +24,7 @@ import { Pagination, PaginationProps } from "$app/components/Pagination";
 import { Popover } from "$app/components/Popover";
 import { showAlert } from "$app/components/server-components/Alert";
 import { extractSortParam } from "$app/components/server-components/UtmLinksPage";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { useDebouncedCallback } from "$app/components/useDebouncedCallback";
 import { useUserAgentInfo } from "$app/components/UserAgent";
 import { Sort, useSortingTableDriver } from "$app/components/useSortingTableDriver";
@@ -304,13 +304,15 @@ const UtmLinkList = () => {
         </section>
       ) : query ? (
         <div className="p-4 md:p-8">
-          <Placeholder imgSrc={noLinksFoundPlaceholder}>
+          <Placeholder>
+            <PlaceholderImage src={noLinksFoundPlaceholder} />
             <h4>No links found for "{query}"</h4>
           </Placeholder>
         </div>
       ) : (
         <div className="p-4 md:p-8">
-          <Placeholder imgSrc={noLinksYetPlaceholder}>
+          <Placeholder>
+            <PlaceholderImage src={noLinksYetPlaceholder} />
             <h2>No links yet</h2>
             <h4>Use UTM links to track which sources are driving the most conversions and revenue</h4>
 

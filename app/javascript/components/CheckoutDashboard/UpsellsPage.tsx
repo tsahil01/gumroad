@@ -36,7 +36,7 @@ import { Select } from "$app/components/Select";
 import { showAlert } from "$app/components/server-components/Alert";
 import { CrossSellModal, UpsellModal } from "$app/components/server-components/CheckoutPage";
 import { PageHeader } from "$app/components/ui/PageHeader";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { useDebouncedCallback } from "$app/components/useDebouncedCallback";
 import { Sort, useSortingTableDriver } from "$app/components/useSortingTableDriver";
 
@@ -321,7 +321,8 @@ const UpsellsPage = (props: UpsellsPageProps) => {
             ) : null}
           </section>
         ) : (
-          <Placeholder imgSrc={placeholder}>
+          <Placeholder>
+            <PlaceholderImage src={placeholder} />
             <h2>Offering an upsell at checkout</h2>
             Upsells allow you to suggest additional products to your customer at checkout. You can nudge them to
             purchase either an upgraded version or an extra product add-on.

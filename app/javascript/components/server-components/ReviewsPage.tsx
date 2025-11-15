@@ -12,7 +12,7 @@ import { Popover } from "$app/components/Popover";
 import { Thumbnail } from "$app/components/Product/Thumbnail";
 import { RatingStars } from "$app/components/RatingStars";
 import { ReviewForm } from "$app/components/ReviewForm";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { useOnChange } from "$app/components/useOnChange";
 
 import placeholderImage from "$assets/images/placeholders/reviews.png";
@@ -131,7 +131,8 @@ const ReviewsPage = ({
       ) : null}
       <section className="p-4 md:p-8">
         {reviews.length === 0 && purchases.length === 0 ? (
-          <Placeholder imgSrc={placeholderImage}>
+          <Placeholder>
+            <PlaceholderImage src={placeholderImage} />
             <h2>You haven't bought anything... yet!</h2>
             Once you do, it'll show up here so you can review them.
             <NavigationButton href={discoverUrl} color="accent">

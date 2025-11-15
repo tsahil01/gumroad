@@ -3,7 +3,7 @@ import placeholderImage from "images/placeholders/support.png";
 import React from "react";
 
 import { Button } from "$app/components/Button";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 
 export function ConversationList({
   onSelect,
@@ -22,7 +22,8 @@ export function ConversationList({
   if (conversations.length === 0) {
     return (
       <section className="p-4 md:p-8">
-        <Placeholder imgSrc={placeholderImage}>
+        <Placeholder>
+          <PlaceholderImage src={placeholderImage} />
           <h2>Need a hand? We're here for you.</h2>
           <p>
             Got a question about selling, payouts, or your products? Send us a message and we'll reply right here so you

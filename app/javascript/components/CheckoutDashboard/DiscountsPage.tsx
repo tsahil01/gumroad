@@ -33,7 +33,7 @@ import { Select, Option } from "$app/components/Select";
 import { showAlert } from "$app/components/server-components/Alert";
 import { TypeSafeOptionSelect } from "$app/components/TypeSafeOptionSelect";
 import { PageHeader } from "$app/components/ui/PageHeader";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { useDebouncedCallback } from "$app/components/useDebouncedCallback";
 import { useGlobalEventListener } from "$app/components/useGlobalEventListener";
 import { useOriginalLocation } from "$app/components/useOriginalLocation";
@@ -457,7 +457,8 @@ const DiscountsPage = ({ offer_codes, pages, products, pagination: initialPagina
             ) : null}
           </section>
         ) : (
-          <Placeholder imgSrc={placeholder}>
+          <Placeholder>
+            <PlaceholderImage src={placeholder} />
             <div>
               <h2>No discounts yet</h2>
               <p>Use discounts to create sweet deals for your customers</p>

@@ -21,7 +21,7 @@ import { useAnalyticsDateRange } from "$app/components/Analytics/useAnalyticsDat
 import { DateRangePicker } from "$app/components/DateRangePicker";
 import { LoadingSpinner } from "$app/components/LoadingSpinner";
 import { showAlert } from "$app/components/server-components/Alert";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 
 import placeholder from "$assets/images/placeholders/sales.png";
 
@@ -205,7 +205,8 @@ const Analytics = ({ products: initialProducts, country_codes, state_names }: An
         </div>
       ) : (
         <div className="p-4 md:p-8">
-          <Placeholder imgSrc={placeholder}>
+          <Placeholder>
+            <PlaceholderImage src={placeholder} />
             <h2>You're just getting started.</h2>
             <p>
               You don't have any sales yet. Once you do, you'll see them here, along with powerful data that can help

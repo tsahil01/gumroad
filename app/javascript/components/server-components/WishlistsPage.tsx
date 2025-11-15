@@ -11,7 +11,7 @@ import { Layout } from "$app/components/Library/Layout";
 import { Modal } from "$app/components/Modal";
 import { showAlert } from "$app/components/server-components/Alert";
 import { Toggle } from "$app/components/Toggle";
-import Placeholder from "$app/components/ui/Placeholder";
+import { Placeholder, PlaceholderImage } from "$app/components/ui/Placeholder";
 import { WithTooltip } from "$app/components/WithTooltip";
 
 import placeholder from "$assets/images/placeholders/wishlists.png";
@@ -131,7 +131,8 @@ const WishlistsPage = ({
             </tbody>
           </table>
         ) : (
-          <Placeholder imgSrc={placeholder}>
+          <Placeholder>
+            <PlaceholderImage src={placeholder} />
             <h2>Save products you are wishing for</h2>
             Bookmark and organize your desired products with ease
             <a href="/help/article/343-wishlists" target="_blank" rel="noreferrer">
