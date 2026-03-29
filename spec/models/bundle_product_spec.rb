@@ -124,6 +124,49 @@ describe BundleProduct do
       end
     end
 
+    context "when a soft-deleted bundle product exists for the product" do
+      before do
+        bundle_product.mark_deleted!
+      end
+
+      it "allows adding the product again" do
+        new_bundle_product = build(:bundle_product, product: bundle_product.product, bundle: bundle_product.bundle)
+        expect(new_bundle_product).to be_valid
+      end
+    end
+
+    context "when soft-deleting a bundle product whose product later gained variants" do
+      let(:product) { create(:product, user: bundle_product.bundle.user) }
+
+      before do
+        bundle_product.product = product
+        bundle_product.save!
+        create(:variant_category, link: product)
+      end
+
+      it "allows soft-deletion without validation error" do
+        expect { bundle_product.mark_deleted! }.not_to raise_error
+        expect(bundle_product.reload).to be_deleted
+      end
+    end
+
+    context "when the product has only one variant" do
+      let(:product_with_one_variant) do
+        product = create(:product, user: bundle_product.bundle.user)
+        category = create(:variant_category, link: product)
+        create(:variant, variant_category: category)
+        product
+      end
+
+      before do
+        bundle_product.product = product_with_one_variant
+      end
+
+      it "does not require a variant_id" do
+        expect(bundle_product).to be_valid
+      end
+    end
+
     context "when the bundle is not a bundle" do
       before do
         bundle_product.bundle.is_bundle = false

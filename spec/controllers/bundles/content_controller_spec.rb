@@ -131,6 +131,42 @@ describe Bundles::ContentController, inertia: true do
         expect(flash[:alert]).to eq("Bundles must have at least one product.")
       end
     end
+
+    context "when updating bundle with stale deleted products that have gained variants" do
+      let(:removed_product) { create(:product, user: seller) }
+      let!(:deleted_bundle_product) { create(:bundle_product, bundle: bundle, product: removed_product) }
+      let(:new_product) { create(:product, user: seller) }
+
+      before do
+        deleted_bundle_product.mark_deleted!
+        removed_product.update!(skus_enabled: true)
+        create_list(:sku, 2, link: removed_product)
+      end
+
+      it "successfully updates without false variant validation error" do
+        expect do
+          put :update, params: {
+            bundle_id: bundle.external_id,
+            products: [
+              {
+                product_id: bundle.bundle_products.first.product.external_id,
+                variant_id: nil,
+                quantity: 1,
+              },
+              {
+                product_id: new_product.external_id,
+                quantity: 1,
+              }
+            ]
+          }
+          bundle.reload
+        end.to change { bundle.bundle_products.alive.count }.by(0)
+
+        expect(response).to redirect_to(edit_bundle_content_path(bundle.external_id))
+        expect(flash[:notice]).to eq("Changes saved!")
+        expect(bundle.bundle_products.alive.map(&:product)).to contain_exactly(bundle.bundle_products.first.product, new_product)
+      end
+    end
   end
 
   describe "PUT update_purchases_content" do
